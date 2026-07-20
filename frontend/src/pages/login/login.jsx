@@ -1,190 +1,109 @@
+// Login.jsx
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
+import AuthBrandPanel from "../../components/AuthBrandPanel";
 
 function Login() {
   const navigate = useNavigate();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [selectedRole, setSelectedRole] = useState("BUYER");
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const login = async (e) => {
+  const handleChange = (e) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setError("");
+    setLoading(true);
     try {
-      setLoading(true);
-
-      const response = await api.post("/auth/login", {
-        email,
-        password,
-      });
-
-      const { token, email: userEmail, role } = response.data;
-
-      // Optional role validation
-      if (role !== selectedRole) {
-        alert(
-          `This account belongs to ${role}. Please select the correct role.`
-        );
-        return;
-      }
-
+      // Backend: AuthController.login → returns { token, email, role }
+      const res = await api.post("/auth/login", form);
+      const { token, email, role } = res.data;
       localStorage.setItem("token", token);
-      localStorage.setItem("email", userEmail);
+      localStorage.setItem("email", email);
       localStorage.setItem("role", role);
-
       navigate("/dashboard");
     } catch (err) {
-      console.error(err);
-
-      if (err.response?.status === 401) {
-        alert("Invalid email or password.");
-      } else if (err.response?.status === 403) {
-        alert("You are not authorized to access this application.");
-      } else {
-        alert("Unable to connect to the server.");
-      }
+      console.log(err);
+      setError(
+        err.response?.data?.message ||
+          "Couldn't sign in. Check your email and password and try again."
+      );
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="h-screen w-full flex overflow-hidden">
+      <AuthBrandPanel
+        eyebrow="Welcome back"
+        headline="Pick up right where your due diligence left off."
+        blurb="Every property, verification, and address check you've run is waiting on your dashboard."
+      />
 
-      {/* LEFT PANEL */}
+      <div className="flex-1 h-screen bg-[#EFEAE0] flex items-center justify-center px-6">
+        <div className="w-full max-w-[380px]">
+          <div className="mb-8">
+            <p className="lg:hidden text-[12px] tracking-[2px] text-[#1B2338] font-medium mb-6">
+              DILIGENCE LEDGER
+            </p>
+            <h2 className="font-serif text-[32px] text-[#1B2338] leading-tight">Sign in</h2>
+            <p className="text-sm text-gray-500 mt-1.5">Enter your details to continue</p>
+          </div>
 
-      <div className="w-[42%] bg-[#1F263B] text-white px-14 py-12 flex flex-col justify-between">
+          <form onSubmit={handleSubmit}>
+            {error && (
+              <div className="bg-red-50 border border-red-100 text-red-700 text-sm rounded-md px-4 py-3 mb-5">
+                {error}
+              </div>
+            )}
 
-        <div>
-          <h2 className="uppercase tracking-[4px] text-sm">
-            DILIGENCE LEDGER
-          </h2>
-        </div>
-
-        <div>
-          <h1 className="font-serif text-[48px] leading-[56px]">
-            Every property tells a story. Verify it before you sign.
-          </h1>
-
-          <p className="mt-10 text-gray-300 leading-8 max-w-md">
-            One address. Ownership, tax history, zoning, flood risks,
-            permits and environmental records. Consolidated, secured and
-            explainable.
-          </p>
-        </div>
-
-        <div className="text-gray-400 text-sm">
-          © Diligence Ledger
-        </div>
-
-      </div>
-
-      {/* RIGHT PANEL */}
-
-      <div className="w-[58%] bg-[#F8F5ED] flex items-start pt-24 justify-center">
-
-        <div className="w-[460px]">
-
-          <p className="text-[#C96B5B] text-sm mb-2">
-            Sign in
-          </p>
-
-          <h1 className="font-serif text-[42px]">
-            Welcome back
-          </h1>
-
-          <p className="text-gray-500 mt-2 mb-8">
-            Access your due diligence workspace
-          </p>
-
-          <form onSubmit={login}>
-
-            {/* ROLE BUTTONS */}
-
-            <div className="flex flex-wrap gap-3 mb-8">
-              {[
-                "BUYER",
-                "AGENT",
-                "ADMIN",
-                "LEGAL_REVIEWER",
-                "FINANCIAL",
-              ].map((role) => (
-                <button
-                  key={role}
-                  type="button"
-                  onClick={() => setSelectedRole(role)}
-                  className={`px-4 py-1.5 rounded-full text-[11px] font-medium transition ${
-                    selectedRole === role
-                      ? "bg-[#1F263B] text-white"
-                      : "bg-[#E7E0D3] text-slate-700"
-                  }`}
-                >
-                  {role}
-                </button>
-              ))}
-            </div>
-
-            {/* EMAIL */}
-
-            <label className="block text-xs tracking-[2px] uppercase text-gray-500 mb-2">
-              Email Address
-            </label>
-
+            <label className="text-[11px] uppercase tracking-[1.5px] text-gray-500">Email</label>
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              name="email"
               required
-              className="w-full h-14 bg-[#EFE8D8] rounded-xl px-5 outline-none mb-6"
+              autoFocus
+              value={form.email}
+              onChange={handleChange}
+              className="w-full h-11 mt-1.5 mb-4 rounded-md border border-[#E3DDCE] px-4 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-[#3E63C2]"
+              placeholder="you@company.com"
             />
 
-            {/* PASSWORD */}
-
-            <label className="block text-xs tracking-[2px] uppercase text-gray-500 mb-2">
-              Password
-            </label>
-
+            <div className="flex items-center justify-between">
+              <label className="text-[11px] uppercase tracking-[1.5px] text-gray-500">Password</label>
+            </div>
             <input
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
+              name="password"
               required
-              className="w-full h-14 bg-[#EFE8D8] rounded-xl px-5 outline-none mb-8"
+              value={form.password}
+              onChange={handleChange}
+              className="w-full h-11 mt-1.5 mb-6 rounded-md border border-[#E3DDCE] px-4 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-[#3E63C2]"
+              placeholder="••••••••"
             />
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full h-14 rounded-xl bg-[#1F263B] hover:bg-slate-800 text-white uppercase tracking-[2px] transition disabled:opacity-60"
+              className="w-full h-11 rounded-md bg-[#1B2338] text-white text-sm font-semibold hover:bg-[#2B3450] transition-colors disabled:opacity-60"
             >
-              {loading ? "Signing In..." : "SIGN IN TO WORKSPACE"}
+              {loading ? "Signing in…" : "Sign in"}
             </button>
-
           </form>
 
-          <div className="text-center mt-8">
-            <p className="text-gray-500">
-              New to the platform?
-
-              <Link
-                to="/register"
-                className="ml-2 text-slate-900 font-semibold hover:underline"
-              >
-                Create an account
-              </Link>
-
-            </p>
-          </div>
-
+          <p className="text-center text-sm text-gray-500 mt-7">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-[#3E63C2] font-medium hover:underline">
+              Create one
+            </Link>
+          </p>
         </div>
-
       </div>
-
     </div>
   );
 }

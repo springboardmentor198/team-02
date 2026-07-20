@@ -1,17 +1,12 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 
 import Dashboard from "./pages/Dashboard";
 import PropertySearch from "./pages/PropertySearch";
-import DueDiligence from "./pages/DueDiligence";
 import AddProperty from "./pages/AddProperty";
 import AddressValidation from "./pages/AddressValidation";
-import Reports from "./pages/Reports";
-import Comparables from "./pages/Comparables";
-import RiskMonitoring from "./pages/RiskMonitoring";
-import AuditLog from "./pages/AuditLog";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -19,12 +14,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
         {/* Public Routes */}
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        
 
         {/* Protected Routes */}
         <Route
@@ -46,24 +39,6 @@ function App() {
         />
 
         <Route
-          path="/due-diligence"
-          element={
-            <ProtectedRoute>
-              <DueDiligence />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/due-diligence/:id"
-          element={
-            <ProtectedRoute>
-              <DueDiligence />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
           path="/add-property"
           element={
             <ProtectedRoute>
@@ -73,7 +48,7 @@ function App() {
         />
 
         <Route
-          path="/address"
+          path="/address-validation"
           element={
             <ProtectedRoute>
               <AddressValidation />
@@ -81,42 +56,8 @@ function App() {
           }
         />
 
-        <Route
-          path="/reports"
-          element={
-            <ProtectedRoute>
-              <Reports />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/comparables"
-          element={
-            <ProtectedRoute>
-              <Comparables />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/risk-monitoring"
-          element={
-            <ProtectedRoute>
-              <RiskMonitoring />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/audit-log"
-          element={
-            <ProtectedRoute>
-              <AuditLog />
-            </ProtectedRoute>
-          }
-        />
-
+        {/* Redirect any unknown route */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,222 +1,179 @@
+// Register.jsx
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
+import AuthBrandPanel from "../../components/AuthBrandPanel";
+
+// Matches entity/Role.java. ADMIN is intentionally left out of public
+// self-registration — that role should be assigned internally, not chosen
+// at signup.
+const ROLE_OPTIONS = [
+  { value: "BUYER", label: "Buyer" },
+  { value: "AGENT", label: "Agent" },
+  { value: "LEGAL_REVIEWER", label: "Legal Reviewer" },
+  { value: "FINANCIAL_INSTITUTION", label: "Financial Institution" },
+];
 
 function Register() {
   const navigate = useNavigate();
-
-  const [loading, setLoading] = useState(false);
-
-  const [user, setUser] = useState({
-    username: "",
+  const [form, setForm] = useState({
+    fullName: "",
     email: "",
     password: "",
+    confirmPassword: "",
     role: "BUYER",
   });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const register = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
+    if (form.password !== form.confirmPassword) {
+      setError("Passwords don't match.");
+      return;
+    }
+    if (form.password.length < 8) {
+      setError("Password must be at least 8 characters.");
+      return;
+    }
+
+    setLoading(true);
     try {
-      setLoading(true);
-
-      await api.post("/auth/register", user);
-
-      alert("Registration Successful!");
-
-      navigate("/login");
+      // Backend: AuthController.register expects { fullName, email, password, role }
+      await api.post("/auth/register", {
+        fullName: form.fullName,
+        email: form.email,
+        password: form.password,
+        role: form.role,
+      });
+      navigate("/login", { state: { justRegistered: true } });
     } catch (err) {
       console.log(err);
-
-      if (err.response?.status === 409) {
-        alert("Username or Email already exists.");
-      } else if (err.response?.status === 400) {
-        alert("Invalid registration details.");
-      } else {
-        alert("Registration Failed.");
-      }
+      setError(
+        err.response?.data?.message ||
+          "Couldn't create your account. That email may already be registered."
+      );
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="h-screen flex overflow-hidden">
+    <div className="h-screen w-full flex overflow-hidden">
+      <AuthBrandPanel
+        eyebrow="Get started"
+        headline="Set up access for your role in the diligence process."
+        blurb="Buyers, agents, legal reviewers, and financial institutions all work from the same verified property record."
+      />
 
-      {/* LEFT PANEL */}
-
-      <div className="w-[42%] bg-[#1F263B] text-white px-12 py-10 flex flex-col justify-between">
-
-        <div>
-          <h2 className="uppercase tracking-[4px] text-sm">
-            DILIGENCE LEDGER
-          </h2>
-        </div>
-
-        <div>
-
-          <h1 className="font-serif text-[42px] leading-[50px]">
-
-            Start your property due diligence journey today.
-
-          </h1>
-
-          <p className="mt-6 text-gray-300 leading-7 max-w-md">
-
-            Create your account to securely verify ownership,
-            legal records, tax history, zoning information,
-            permits and environmental risks in one place.
-
-          </p>
-
-        </div>
-
-        <div className="text-gray-400 text-sm">
-          © Diligence Ledger
-        </div>
-
-      </div>
-
-      {/* RIGHT PANEL */}
-
-      <div className="w-[58%] bg-[#F8F5ED] flex items-center justify-center">
-
-        <div className="w-[400px]">
-
-          <p className="text-[#C96B5B] text-sm mb-2">
-
-            Create Your Account
-
-          </p>
-
-          <h1 className="font-serif text-[36px]">
-
-            Register
-
-          </h1>
-
-          <p className="text-gray-500 mt-2 mb-4">
-
-            Create your Due Diligence account
-
-          </p>
-
-          <form onSubmit={register}>
-
-            {/* Username */}
-
-            <label className="block text-xs tracking-[2px] uppercase text-gray-500 mb-2">
-
-              Username
-
-            </label>
-
-            <input
-              type="text"
-              name="username"
-              value={user.username}
-              onChange={handleChange}
-              placeholder="Enter username"
-              required
-              className="w-full h-11 bg-[#EFE8D8] rounded-xl px-5 outline-none mb-4"
-            />
-
-            {/* Email */}
-
-            <label className="block text-xs tracking-[2px] uppercase text-gray-500 mb-2">
-
-              Email Address
-
-            </label>
-
-            <input
-              type="email"
-              name="email"
-              value={user.email}
-              onChange={handleChange}
-              placeholder="Enter your email"
-              required
-              className="w-full h-11 bg-[#EFE8D8] rounded-xl px-5 outline-none mb-4"
-            />
-
-            {/* Password */}
-
-            <label className="block text-xs tracking-[2px] uppercase text-gray-500 mb-2">
-
-              Password
-
-            </label>
-
-            <input
-              type="password"
-              name="password"
-              value={user.password}
-              onChange={handleChange}
-              placeholder="Create a password"
-              required
-              className="w-full h-11 bg-[#EFE8D8] rounded-xl px-5 outline-none mb-4"
-            />
-
-            {/* Role */}
-
-            <label className="block text-xs tracking-[2px] uppercase text-gray-500 mb-2">
-
-              Select Role
-
-            </label>
-
-            <select
-              name="role"
-              value={user.role}
-              onChange={handleChange}
-              className="w-full h-11 bg-[#EFE8D8] rounded-xl px-5 outline-none mb-5"
-            >
-              <option value="BUYER">Buyer</option>
-              <option value="AGENT">Agent</option>
-              <option value="ADMIN">Admin</option>
-              <option value="LEGAL_REVIEWER">Legal Reviewer</option>
-              <option value="FINANCIAL_INSTITUTION">
-                Financial Institution
-              </option>
-            </select>
-                        <button
-              type="submit"
-              disabled={loading}
-              className="w-full h-11 rounded-xl bg-[#1F263B] hover:bg-slate-800 text-white uppercase tracking-[2px] transition disabled:opacity-60"
-            >
-              {loading ? "Creating Account..." : "CREATE ACCOUNT"}
-            </button>
-
-          </form>
-
-          <div className="text-center mt-4">
-
-            <p className="text-gray-500">
-
-              Already have an account?
-
-              <Link
-                to="/login"
-                className="ml-2 text-slate-900 font-semibold hover:underline"
-              >
-                Login
-              </Link>
-
+      <div className="flex-1 h-screen bg-[#EFEAE0] flex items-center justify-center px-6 overflow-hidden">
+        <div className="w-full max-w-[420px]">
+          <div className="mb-6">
+            <p className="lg:hidden text-[12px] tracking-[2px] text-[#1B2338] font-medium mb-5">
+              DILIGENCE LEDGER
             </p>
-
+            <h2 className="font-serif text-[30px] text-[#1B2338] leading-tight">
+              Create your account
+            </h2>
+            <p className="text-sm text-gray-500 mt-1">Set up access to the diligence platform</p>
           </div>
 
+          <form onSubmit={handleSubmit}>
+            {error && (
+              <div className="bg-red-50 border border-red-100 text-red-700 text-sm rounded-md px-4 py-2.5 mb-4">
+                {error}
+              </div>
+            )}
+
+            <label className="text-[11px] uppercase tracking-[1.5px] text-gray-500">Full name</label>
+            <input
+              name="fullName"
+              required
+              autoFocus
+              value={form.fullName}
+              onChange={handleChange}
+              className="w-full h-10 mt-1.5 mb-4 rounded-md border border-[#E3DDCE] px-4 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-[#3E63C2]"
+              placeholder="Durga Prasad Kasireddy"
+            />
+
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="text-[11px] uppercase tracking-[1.5px] text-gray-500">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  value={form.email}
+                  onChange={handleChange}
+                  className="w-full h-10 mt-1.5 rounded-md border border-[#E3DDCE] px-4 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-[#3E63C2]"
+                  placeholder="you@company.com"
+                />
+              </div>
+              <div>
+                <label className="text-[11px] uppercase tracking-[1.5px] text-gray-500">Role</label>
+                <select
+                  name="role"
+                  value={form.role}
+                  onChange={handleChange}
+                  className="w-full h-10 mt-1.5 rounded-md border border-[#E3DDCE] px-4 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-[#3E63C2]"
+                >
+                  {ROLE_OPTIONS.map((r) => (
+                    <option key={r.value} value={r.value}>{r.label}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div>
+                <label className="text-[11px] uppercase tracking-[1.5px] text-gray-500">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  required
+                  value={form.password}
+                  onChange={handleChange}
+                  className="w-full h-10 mt-1.5 rounded-md border border-[#E3DDCE] px-4 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-[#3E63C2]"
+                  placeholder="••••••••"
+                />
+              </div>
+              <div>
+                <label className="text-[11px] uppercase tracking-[1.5px] text-gray-500">Confirm</label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  required
+                  value={form.confirmPassword}
+                  onChange={handleChange}
+                  className="w-full h-10 mt-1.5 rounded-md border border-[#E3DDCE] px-4 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-[#3E63C2]"
+                  placeholder="••••••••"
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full h-11 rounded-md bg-[#1B2338] text-white text-sm font-semibold hover:bg-[#2B3450] transition-colors disabled:opacity-60"
+            >
+              {loading ? "Creating account…" : "Create account"}
+            </button>
+          </form>
+
+          <p className="text-center text-sm text-gray-500 mt-5">
+            Already have an account?{" "}
+            <Link to="/login" className="text-[#3E63C2] font-medium hover:underline">
+              Sign in
+            </Link>
+          </p>
         </div>
-
       </div>
-
     </div>
   );
 }
