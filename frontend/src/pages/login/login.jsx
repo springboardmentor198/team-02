@@ -86,6 +86,12 @@ function Login() {
               className="w-full h-11 mt-1.5 mb-6 rounded-md border border-[#E3DDCE] px-4 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-[#3E63C2]"
               placeholder="••••••••"
             />
+           <Link
+              to="/forgot-password"
+              className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+            >
+              Forgot Password?
+            </Link>
 
             <button
               type="submit"

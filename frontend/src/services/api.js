@@ -22,14 +22,7 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("email");
-      localStorage.removeItem("role");
-      if (window.location.pathname !== "/login") {
-        window.location.href = "/login";
-      }
-    }
+    console.log("Interceptor Status:", error.response?.status);
     return Promise.reject(error);
   }
 );

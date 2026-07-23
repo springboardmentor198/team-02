@@ -11,6 +11,11 @@ import AddressValidation from "./pages/AddressValidation";
 import Profile from "./pages/Profile";
 import TaxHistory from "./pages/TaxHistory";
 
+// Forgot Password Pages
+import ForgotPassword from "./pages/ForgotPassword";
+import VerifyOtp from "./pages/VerifyOtp";
+import ResetPassword from "./pages/ResetPassword";
+
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -21,6 +26,11 @@ function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* Forgot Password Flow */}
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/verify-otp" element={<VerifyOtp />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* Protected Routes */}
         <Route
@@ -77,7 +87,6 @@ function App() {
           }
         />
 
-        {/* Tax History */}
         <Route
           path="/tax-history"
           element={
