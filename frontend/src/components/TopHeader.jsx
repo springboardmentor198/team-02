@@ -1,5 +1,5 @@
 // components/TopHeader.jsx
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function TopHeader({ placeholder = "Search by address, parcel ID, or owner..." }) {
   const navigate = useNavigate();
@@ -25,9 +25,12 @@ function TopHeader({ placeholder = "Search by address, parcel ID, or owner..." }
           <p className="text-[11px] uppercase tracking-[2px] text-gray-500">Logged in as</p>
           <p className="font-semibold text-sm">{role}</p>
         </div>
-        <div className="w-10 h-10 rounded-full bg-[#1B2338] text-white flex items-center justify-center text-sm">
+        <Link
+          to="/profile"
+          className="w-10 h-10 rounded-full bg-[#1B2338] text-white flex items-center justify-center text-sm hover:bg-[#2B3450] transition-colors"
+        >
           {username[0]?.toUpperCase()}
-        </div>
+        </Link>
       </div>
     </header>
   );

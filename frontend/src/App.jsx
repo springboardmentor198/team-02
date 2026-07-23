@@ -1,18 +1,21 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 
 import Dashboard from "./pages/Dashboard";
-import PropertySearch from "./pages/PropertySearch";
 import AddProperty from "./pages/AddProperty";
+import PropertySearch from "./pages/PropertySearch";
+import PropertyVerification from "./pages/PropertyVerification";
 import AddressValidation from "./pages/AddressValidation";
+import Profile from "./pages/Profile";
+import TaxHistory from "./pages/TaxHistory";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Navigate to="/login" replace />} />
@@ -30,6 +33,15 @@ function App() {
         />
 
         <Route
+          path="/add-property"
+          element={
+            <ProtectedRoute>
+              <AddProperty />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/property-search"
           element={
             <ProtectedRoute>
@@ -39,10 +51,10 @@ function App() {
         />
 
         <Route
-          path="/add-property"
+          path="/property-verification"
           element={
             <ProtectedRoute>
-              <AddProperty />
+              <PropertyVerification />
             </ProtectedRoute>
           }
         />
@@ -56,10 +68,29 @@ function App() {
           }
         />
 
-        {/* Redirect any unknown route */}
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Tax History */}
+        <Route
+          path="/tax-history"
+          element={
+            <ProtectedRoute>
+              <TaxHistory />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* 404 */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
