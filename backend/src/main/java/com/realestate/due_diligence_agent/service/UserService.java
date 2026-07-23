@@ -1,5 +1,8 @@
 package com.realestate.due_diligence_agent.service;
 
+import java.time.LocalDateTime;
+import java.util.Random;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,10 +10,15 @@ import org.springframework.stereotype.Service;
 
 import com.realestate.due_diligence_agent.dto.AuthResponse;
 import com.realestate.due_diligence_agent.dto.ChangePasswordRequest;
+import com.realestate.due_diligence_agent.dto.ForgotPasswordRequest;
 import com.realestate.due_diligence_agent.dto.LoginRequest;
 import com.realestate.due_diligence_agent.dto.RegisterRequest;
+import com.realestate.due_diligence_agent.dto.ResetPasswordRequest;
 import com.realestate.due_diligence_agent.dto.UpdateProfileRequest;
+import com.realestate.due_diligence_agent.dto.VerifyOtpRequest;
+import com.realestate.due_diligence_agent.entity.OtpToken;
 import com.realestate.due_diligence_agent.entity.User;
+import com.realestate.due_diligence_agent.repository.OtpRepository;
 import com.realestate.due_diligence_agent.repository.UserRepository;
 import com.realestate.due_diligence_agent.security.JwtService;
 
@@ -20,19 +28,22 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final OtpRepository otpRepository;
+    private final EmailService emailService;
 
     public UserService(UserRepository userRepository,
             PasswordEncoder passwordEncoder,
-            JwtService jwtService) {
+            JwtService jwtService,
+            OtpRepository otpRepository,
+            EmailService emailService) {
 
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
+        this.otpRepository = otpRepository;
+        this.emailService = emailService;
     }
 
-    // ==========================
-    // Register
-    // ==========================
     public User register(RegisterRequest request) {
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
@@ -49,9 +60,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // ==========================
-    // Login
-    // ==========================
     public AuthResponse login(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail())
@@ -70,9 +78,6 @@ public class UserService {
         );
     }
 
-    // ==========================
-    // Logged In User
-    // ==========================
     public User getLoggedInUser() {
 
         Authentication authentication
@@ -81,9 +86,6 @@ public class UserService {
         return (User) authentication.getPrincipal();
     }
 
-    // ==========================
-    // Update Profile
-    // ==========================
     public User updateProfile(UpdateProfileRequest request) {
 
         User user = getLoggedInUser();
@@ -101,32 +103,65 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // ==========================
-    // Change Password
-    // ==========================
     public void changePassword(ChangePasswordRequest request) {
 
         User user = getLoggedInUser();
 
-        // Verify current password
         if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
             throw new RuntimeException("Current password is incorrect.");
         }
 
-        // Check if new passwords match
         if (!request.getNewPassword().equals(request.getConfirmPassword())) {
             throw new RuntimeException("New password and confirm password do not match.");
         }
 
-        // Prevent using the same password again
         if (passwordEncoder.matches(request.getNewPassword(), user.getPassword())) {
             throw new RuntimeException("New password cannot be the same as the current password.");
         }
 
-        // Save new password
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
-
         userRepository.save(user);
     }
 
+    // Forgot Password
+    public void forgotPassword(ForgotPasswordRequest request) {
+
+        userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        otpRepository.deleteByEmail(request.getEmail());
+
+        String otp = String.format("%06d", new Random().nextInt(1000000));
+
+        OtpToken token = new OtpToken(
+                request.getEmail(),
+                otp,
+                LocalDateTime.now().plusMinutes(10));
+
+        otpRepository.save(token);
+        emailService.sendOtp(request.getEmail(), otp);
+    }
+
+    public void verifyOtp(VerifyOtpRequest request) {
+
+        OtpToken token = otpRepository.findByEmailAndOtp(
+                request.getEmail(),
+                request.getOtp())
+                .orElseThrow(() -> new RuntimeException("Invalid OTP"));
+
+        if (token.getExpiryTime().isBefore(LocalDateTime.now())) {
+            throw new RuntimeException("OTP has expired");
+        }
+    }
+
+    public void resetPassword(ResetPasswordRequest request) {
+
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        userRepository.save(user);
+
+        otpRepository.deleteByEmail(request.getEmail());
+    }
 }
