@@ -7,6 +7,8 @@ import Properties from "./pages/Properties";
 import AddProperty from "./pages/AddProperty";
 import AddressValidation from "./pages/AddressValidation";
 import DueDiligence from "./pages/DueDiligence";
+import PermitHistory from "./pages/PermitHistory";
+import EnvironmentalRecords from "./pages/EnvironmentalRecords";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -57,11 +59,30 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
                 <Route
                     path="/due-diligence"
                     element={
                         <ProtectedRoute>
                             <DueDiligence />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/permits"
+                    element={
+                        <ProtectedRoute>
+                            <PermitHistory />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/environmental"
+                    element={
+                        <ProtectedRoute>
+                            <EnvironmentalRecords />
                         </ProtectedRoute>
                     }
                 />
