@@ -29,6 +29,10 @@ function Sidebar() {
                     📍 Address Validation
                 </Link>
 
+                <Link to="/due-diligence">
+                    🏠 Due Diligence
+                </Link>
+
             </div>
 
         </div>

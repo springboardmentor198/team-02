@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Properties from "./pages/Properties";
 import AddProperty from "./pages/AddProperty";
 import AddressValidation from "./pages/AddressValidation";
+import DueDiligence from "./pages/DueDiligence";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -53,6 +54,14 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <AddressValidation />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/due-diligence"
+                    element={
+                        <ProtectedRoute>
+                            <DueDiligence />
                         </ProtectedRoute>
                     }
                 />
