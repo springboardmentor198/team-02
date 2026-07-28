@@ -1,4 +1,3 @@
-
 package com.realestate.due_diligence_agent.controller;
 
 import java.util.List;
@@ -37,6 +36,18 @@ public class PropertyController {
         return propertyService.getAllProperties();
     }
 
+    @PutMapping("/{id}")
+    public Property updateProperty(@PathVariable Long id,
+                                   @RequestBody PropertyRequest request) {
+        return propertyService.updateProperty(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteProperty(@PathVariable Long id) {
+        propertyService.deleteProperty(id);
+        return "Property deleted successfully.";
+    }
+
     @GetMapping("/city/{city}")
     public List<Property> getByCity(@PathVariable String city) {
         return propertyService.getPropertiesByCity(city);
@@ -58,12 +69,8 @@ public class PropertyController {
         return propertyService.getPropertyTypeStats();
     }
 
-    /**
-     * Returns property details together with
-     * land registry and ownership information.
-     */
     @GetMapping("/{id}")
     public PropertyDetailsResponse getPropertyById(@PathVariable Long id) {
-        return propertyService.getPropertyById(id);
+        return propertyService.getPropertyDetailsById(id);
     }
 }

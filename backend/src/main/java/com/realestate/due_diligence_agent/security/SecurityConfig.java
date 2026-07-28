@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -27,20 +26,28 @@ public class SecurityConfig {
 
         http
                 .csrf(csrf -> csrf.disable())
+
                 .cors(Customizer.withDefaults())
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
+
                 .authorizeHttpRequests(auth -> auth
+
+                        // Public APIs
                         .requestMatchers("/api/auth/**").permitAll()
+
+                        // Role Based APIs
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/buyer/**").hasRole("BUYER")
                         .requestMatchers("/api/agent/**").hasRole("AGENT")
                         .requestMatchers("/api/legal/**").hasRole("LEGAL_REVIEWER")
                         .requestMatchers("/api/bank/**").hasRole("FINANCIAL_INSTITUTION")
-                        .anyRequest().authenticated()
-                )
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+                        // Everything else
+                        .anyRequest().authenticated())
+
+                        .httpBasic(httpBasic -> httpBasic.disable())
+
+                .addFilterBefore(jwtFilter,
+                        UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -52,18 +59,19 @@ public class SecurityConfig {
 
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:5173",
-                "http://localhost:5174"
-        ));
+                "http://localhost:5174",
+                "http://localhost:5175",
+                "http://localhost:5176"));
 
         configuration.setAllowedMethods(List.of(
                 "GET",
                 "POST",
                 "PUT",
                 "DELETE",
-                "OPTIONS"
-        ));
+                "OPTIONS"));
 
         configuration.setAllowedHeaders(List.of("*"));
+
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source =
