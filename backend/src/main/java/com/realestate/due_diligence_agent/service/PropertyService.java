@@ -21,6 +21,8 @@ import com.realestate.due_diligence_agent.dto.PropertyDetailsResponse;
 import com.realestate.due_diligence_agent.dto.ZoningResponse;
 import com.realestate.due_diligence_agent.dto.LegalRecordResponse;
 import com.realestate.due_diligence_agent.dto.FloodZoneResponse;
+import com.realestate.due_diligence_agent.dto.PermitResponse;
+import com.realestate.due_diligence_agent.dto.EnvironmentalResponse;
 
 
 
@@ -37,13 +39,18 @@ public class PropertyService {
     private final LegalRecordService legalRecordService;
     private final ZoningService zoningService;
     private final FloodZoneService floodZoneService;
+    private final PermitService permitService;
+private final EnvironmentalService environmentalService;
 
     public PropertyService(PropertyRepository propertyRepository,
             AddressValidationService addressValidationService,
             VerificationService verificationService,
             LandRegistryService landRegistryService,
             OwnershipService ownershipService, LegalRecordService legalRecordService,
-                           ZoningService zoningService, FloodZoneService floodZoneService      ) {
+                           ZoningService zoningService,
+FloodZoneService floodZoneService,
+PermitService permitService,
+EnvironmentalService environmentalService     ) {
 
         this.propertyRepository = propertyRepository;
         this.addressValidationService = addressValidationService;
@@ -53,6 +60,8 @@ public class PropertyService {
         this.legalRecordService = legalRecordService;
         this.zoningService = zoningService;
         this.floodZoneService = floodZoneService;
+        this.permitService = permitService;
+        this.environmentalService = environmentalService;
 
     }
 
@@ -295,7 +304,12 @@ public class PropertyService {
                 zoningService.getZoning(property);
 
         FloodZoneResponse floodZone =
-                floodZoneService.getFloodZone(property);
+        floodZoneService.getFloodZone(property.getId());
+        PermitResponse permit =
+        permitService.getPermit(property);
+
+        EnvironmentalResponse environmental =
+        environmentalService.getEnvironmental(property);
 
         return new PropertyDetailsResponse(
                 property.getId(),
@@ -315,7 +329,9 @@ public class PropertyService {
                 ownership,
                 legalRecord,
                 zoning,
-                floodZone
+                floodZone,
+                permit,
+                environmental
         );
     }
 }

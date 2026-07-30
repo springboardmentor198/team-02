@@ -10,16 +10,21 @@ import com.realestate.due_diligence_agent.dto.PropertyRequest;
 import com.realestate.due_diligence_agent.dto.VerificationResult;
 import com.realestate.due_diligence_agent.entity.Property;
 import com.realestate.due_diligence_agent.service.PropertyService;
+import com.realestate.due_diligence_agent.dto.FloodZoneResponse;
+import com.realestate.due_diligence_agent.service.FloodZoneService;
 
 @RestController
 @RequestMapping("/api/properties")
 public class PropertyController {
 
     private final PropertyService propertyService;
+    private final FloodZoneService floodZoneService;
 
-    public PropertyController(PropertyService propertyService) {
-        this.propertyService = propertyService;
-    }
+    public PropertyController(PropertyService propertyService,
+                          FloodZoneService floodZoneService) {
+    this.propertyService = propertyService;
+    this.floodZoneService = floodZoneService;
+}
 
     @PostMapping
     public Property addProperty(@RequestBody PropertyRequest request) {
@@ -73,4 +78,8 @@ public class PropertyController {
     public PropertyDetailsResponse getPropertyById(@PathVariable Long id) {
         return propertyService.getPropertyDetailsById(id);
     }
+    @GetMapping("/{id}/flood-zone")
+    public FloodZoneResponse getFloodZone(@PathVariable Long id) {
+    return floodZoneService.getFloodZone(id);
+}
 }
