@@ -27,4 +27,13 @@ api.interceptors.response.use(
   }
 );
 
+/* ===========================
+   Flood Zone API
+   =========================== */
+
+export const getFloodZone = async (propertyId) => {
+  const response = await api.get(`/properties/${propertyId}/flood-zone`);
+  return response.data;
+};
+
 export default api;

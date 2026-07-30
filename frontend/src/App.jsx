@@ -10,6 +10,7 @@ import PropertyVerification from "./pages/PropertyVerification";
 import AddressValidation from "./pages/AddressValidation";
 import Profile from "./pages/Profile";
 import TaxHistory from "./pages/TaxHistory";
+import FloodZone from "./pages/FloodZone";
 
 // Forgot Password Pages
 import ForgotPassword from "./pages/ForgotPassword";
@@ -22,6 +23,7 @@ function App() {
   return (
     <Router>
       <Routes>
+
         {/* Public Routes */}
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
@@ -33,6 +35,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* Protected Routes */}
+
         <Route
           path="/dashboard"
           element={
@@ -96,8 +99,19 @@ function App() {
           }
         />
 
+        {/* Flood Zone Verification */}
+        <Route
+          path="/properties/:id/flood-zone"
+          element={
+            <ProtectedRoute>
+              <FloodZone />
+            </ProtectedRoute>
+          }
+        />
+
         {/* 404 */}
         <Route path="*" element={<Navigate to="/login" replace />} />
+
       </Routes>
     </Router>
   );

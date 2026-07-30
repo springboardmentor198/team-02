@@ -1,5 +1,6 @@
 // PropertySearch.jsx
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import TopHeader from "../components/TopHeader";
 import StatusBadge from "../components/StatusBadge";
@@ -9,6 +10,7 @@ const PROPERTY_TYPES = ["ALL", "Residential", "Commercial", "Industrial", "Land"
 const STATUS_OPTIONS = ["ALL", "Pending", "Verified", "Needs Review", "Rejected"];
 
 function PropertySearch() {
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [propertyType, setPropertyType] = useState("ALL");
   const [status, setStatus] = useState("ALL");
@@ -204,14 +206,22 @@ function PropertySearch() {
                 </div>
               )}
             </div>
-            <div className="flex gap-3 mt-6">
+            <div className="flex flex-wrap gap-3 mt-6">
               <button
                 onClick={() => handleVerify(selected)}
                 disabled={verifying}
                 className="flex-1 h-10 rounded-full bg-[#1B2338] text-white text-sm font-medium hover:bg-[#2B3450] disabled:opacity-60"
               >
-                {verifying ? "Verifying…" : "Run verification"}
+                {verifying ? "Verifying…" : "Run Verification"}
               </button>
+
+              <button
+                onClick={() => navigate(`/properties/${selected.id}/flood-zone`)}
+                className="flex-1 h-10 rounded-full bg-blue-600 text-white text-sm font-medium hover:bg-blue-700"
+              >
+                🌊 Flood Zone
+              </button>
+
               <button
                 onClick={() => setSelected(null)}
                 className="h-10 px-5 rounded-full border border-[#E3DDCE] text-sm text-gray-600 hover:bg-[#F8F6F0]"

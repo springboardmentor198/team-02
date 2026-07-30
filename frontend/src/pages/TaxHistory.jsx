@@ -10,6 +10,7 @@ function TaxHistory() {
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
 
   const emptyForm = {
     taxYear: "",
@@ -67,16 +68,19 @@ function TaxHistory() {
     try {
       if (editingId) {
         await api.put(`/tax-history/${editingId}`, form);
+        setSuccessMsg("Tax record updated successfully.");
       } else {
         await api.post(
           `/tax-history/property/${selectedProperty}`,
           form
         );
+        setSuccessMsg("Tax record added successfully.");
       }
 
       setForm(emptyForm);
       setEditingId(null);
       loadHistory(selectedProperty);
+      setTimeout(() => setSuccessMsg(""), 3000);
 
     } catch (err) {
       console.error(err);
@@ -106,6 +110,8 @@ function TaxHistory() {
     try {
       await api.delete(`/tax-history/${id}`);
       loadHistory(selectedProperty);
+      setSuccessMsg("Tax record deleted successfully.");
+      setTimeout(() => setSuccessMsg(""), 3000);
     } catch (err) {
       console.error(err);
       alert("Delete failed.");
@@ -131,6 +137,12 @@ function TaxHistory() {
                     {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 rounded-md px-4 py-3 mt-6">
               {error}
+            </div>
+          )}
+
+          {successMsg && (
+            <div className="bg-green-50 border border-green-200 text-green-700 rounded-md px-4 py-3 mt-6">
+              {successMsg}
             </div>
           )}
 
