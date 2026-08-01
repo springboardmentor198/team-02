@@ -3,6 +3,8 @@ package com.realestate.due_diligence_agent.controller;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.*;
 
 import com.realestate.due_diligence_agent.dto.PropertyDetailsResponse;
@@ -27,7 +29,7 @@ public class PropertyController {
 }
 
     @PostMapping
-    public Property addProperty(@RequestBody PropertyRequest request) {
+    public Property addProperty(@Valid @RequestBody PropertyRequest request) {
         return propertyService.addProperty(request);
     }
 
@@ -43,7 +45,7 @@ public class PropertyController {
 
     @PutMapping("/{id}")
     public Property updateProperty(@PathVariable Long id,
-                                   @RequestBody PropertyRequest request) {
+                                   @Valid @RequestBody PropertyRequest request) {
         return propertyService.updateProperty(id, request);
     }
 

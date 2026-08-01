@@ -18,6 +18,9 @@ import com.realestate.due_diligence_agent.dto.UpdateProfileRequest;
 import com.realestate.due_diligence_agent.dto.VerifyOtpRequest;
 import com.realestate.due_diligence_agent.entity.OtpToken;
 import com.realestate.due_diligence_agent.entity.User;
+import com.realestate.due_diligence_agent.exception.BadRequestException;
+import com.realestate.due_diligence_agent.exception.ResourceNotFoundException;
+import com.realestate.due_diligence_agent.exception.UnauthorizedException;
 import com.realestate.due_diligence_agent.repository.OtpRepository;
 import com.realestate.due_diligence_agent.repository.UserRepository;
 import com.realestate.due_diligence_agent.security.JwtService;
@@ -47,7 +50,7 @@ public class UserService {
     public User register(RegisterRequest request) {
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already exists!");
+            throw new BadRequestException("Email already exists!");
         }
 
         User user = new User();
@@ -63,10 +66,10 @@ public class UserService {
     public AuthResponse login(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid password");
+            throw new UnauthorizedException("Invalid password");
         }
 
         String token = jwtService.generateToken(user.getEmail());
@@ -93,7 +96,7 @@ public class UserService {
         userRepository.findByEmail(request.getEmail().trim())
                 .ifPresent(existingUser -> {
                     if (!existingUser.getId().equals(user.getId())) {
-                        throw new RuntimeException("Email is already in use.");
+                        throw new BadRequestException("Email is already in use.");
                     }
                 });
 
@@ -108,15 +111,15 @@ public class UserService {
         User user = getLoggedInUser();
 
         if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
-            throw new RuntimeException("Current password is incorrect.");
+            throw new UnauthorizedException("Current password is incorrect.");
         }
 
         if (!request.getNewPassword().equals(request.getConfirmPassword())) {
-            throw new RuntimeException("New password and confirm password do not match.");
+            throw new BadRequestException("New password and confirm password do not match.");
         }
 
         if (passwordEncoder.matches(request.getNewPassword(), user.getPassword())) {
-            throw new RuntimeException("New password cannot be the same as the current password.");
+            throw new BadRequestException("New password cannot be the same as the current password.");
         }
 
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
@@ -127,7 +130,7 @@ public class UserService {
     public void forgotPassword(ForgotPasswordRequest request) {
 
         userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         otpRepository.deleteByEmail(request.getEmail());
 
@@ -147,17 +150,17 @@ public class UserService {
         OtpToken token = otpRepository.findByEmailAndOtp(
                 request.getEmail(),
                 request.getOtp())
-                .orElseThrow(() -> new RuntimeException("Invalid OTP"));
+                .orElseThrow(() -> new BadRequestException("Invalid OTP"));
 
         if (token.getExpiryTime().isBefore(LocalDateTime.now())) {
-            throw new RuntimeException("OTP has expired");
+            throw new BadRequestException("OTP has expired");
         }
     }
 
     public void resetPassword(ResetPasswordRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         userRepository.save(user);
