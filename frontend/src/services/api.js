@@ -36,4 +36,24 @@ export const getFloodZone = async (propertyId) => {
   return response.data;
 };
 
+/* ===========================
+   Risk Assessment API
+   =========================== */
+
+// Backend: RiskController → POST /api/risk/{propertyId}
+// Response: { propertyId, totalScore, riskLevel, recommendation }
+export const generateRiskAssessment = async (propertyId) => {
+  const response = await api.post(`/risk/${propertyId}`);
+  return response.data;
+};
+
+// Reuses the same property detail endpoint the Dashboard already calls, so
+// the Risk Assessment page can show a Property Summary card + derive its
+// Risk Breakdown from real landRegistry/legalRecord/zoning/environmental
+// data instead of inventing numbers the backend doesn't return.
+export const getPropertySummary = async (propertyId) => {
+  const response = await api.get(`/properties/${propertyId}`);
+  return response.data;
+};
+
 export default api;

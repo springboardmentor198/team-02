@@ -9,6 +9,7 @@ const navItems = [
   { label: "PROPERTY SEARCH", path: "/property-search" },
   { label: "ADD PROPERTY", path: "/add-property" },
   { label: "ADDRESS VALIDATION", path: "/address-validation" },
+  { label: "RISK ASSESSMENT", path: "/risk-assessment" },
 ];
 
 function Sidebar() {

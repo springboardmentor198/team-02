@@ -18,6 +18,7 @@ import VerifyOtp from "./pages/VerifyOtp";
 import ResetPassword from "./pages/ResetPassword";
 
 import ProtectedRoute from "./components/ProtectedRoute";
+import RiskAssessment from "./pages/RiskAssessment";
 
 function App() {
   return (
@@ -108,6 +109,14 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+        path="/risk-assessment"
+        element={
+            <ProtectedRoute>
+                <RiskAssessment />
+            </ProtectedRoute>
+           }
+         />
 
         {/* 404 */}
         <Route path="*" element={<Navigate to="/login" replace />} />
