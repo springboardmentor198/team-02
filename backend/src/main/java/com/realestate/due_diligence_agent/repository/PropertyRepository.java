@@ -10,14 +10,15 @@ import com.realestate.due_diligence_agent.entity.User;
 
 public interface PropertyRepository extends JpaRepository<Property, Long> {
 
+    List<Property> findByUser(User user);
+
     List<Property> findByCity(String city);
 
     List<Property> findByPropertyType(String propertyType);
 
     List<Property> findByPriceBetween(Double minPrice, Double maxPrice);
 
-    // NEW
-    List<Property> findByUser(User user);
     Optional<Property> findByIdAndUser(Long id, User user);
 
+    List<Property> findByCityAndPropertyType(String city, String propertyType);
 }

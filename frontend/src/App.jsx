@@ -19,6 +19,8 @@ import ResetPassword from "./pages/ResetPassword";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import RiskAssessment from "./pages/RiskAssessment";
+import ComparableAnalysis from "./pages/ComparableAnalysis";
+import ValuationComparison from "./pages/ValuationComparison";
 
 function App() {
   return (
@@ -117,6 +119,24 @@ function App() {
             </ProtectedRoute>
            }
          />
+
+        <Route
+          path="/comparable-analysis"
+          element={
+            <ProtectedRoute>
+              <ComparableAnalysis />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/valuation-comparison"
+          element={
+            <ProtectedRoute>
+              <ValuationComparison />
+            </ProtectedRoute>
+          }
+        />
 
         {/* 404 */}
         <Route path="*" element={<Navigate to="/login" replace />} />

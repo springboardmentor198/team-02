@@ -10,6 +10,8 @@ const navItems = [
   { label: "ADD PROPERTY", path: "/add-property" },
   { label: "ADDRESS VALIDATION", path: "/address-validation" },
   { label: "RISK ASSESSMENT", path: "/risk-assessment" },
+  { label: "COMPARABLE ANALYSIS", path: "/comparable-analysis" },
+  { label: "VALUATION COMPARISON", path: "/valuation-comparison" },
 ];
 
 function Sidebar() {

@@ -56,4 +56,32 @@ export const getPropertySummary = async (propertyId) => {
   return response.data;
 };
 
+// Reuses the same "/properties" listing Dashboard.jsx & PropertySearch.jsx
+// already call, so the Comparable / Valuation pickers show real tracked
+// properties instead of asking the user to type an ID.
+export const getAllProperties = async () => {
+  const response = await api.get("/properties");
+  return response.data;
+};
+
+/* ===========================
+   Comparable Property Analysis API
+   =========================== */
+
+// Backend: ComparableController → GET /api/comparable/{propertyId}
+export const getComparableAnalysis = async (propertyId) => {
+  const response = await api.get(`/comparable/${propertyId}`);
+  return response.data;
+};
+
+/* ===========================
+   Property Valuation Comparison API
+   =========================== */
+
+// Backend: ValuationController → GET /api/valuation/{propertyId}
+export const getValuationComparison = async (propertyId) => {
+  const response = await api.get(`/valuation/${propertyId}`);
+  return response.data;
+};
+
 export default api;
