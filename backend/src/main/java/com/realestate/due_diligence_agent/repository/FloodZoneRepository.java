@@ -11,9 +11,4 @@ import com.realestate.due_diligence_agent.entity.FloodZone;
 public interface FloodZoneRepository extends JpaRepository<FloodZone, Long> {
 
     Optional<FloodZone> findByPropertyId(Long propertyId);
-<<<<<<< HEAD
 }
-=======
-
-}
->>>>>>> 849a8d6 (Implement Task 4: Due Diligence Report Generation)

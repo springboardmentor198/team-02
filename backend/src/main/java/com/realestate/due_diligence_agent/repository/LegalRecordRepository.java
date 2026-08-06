@@ -11,9 +11,4 @@ import com.realestate.due_diligence_agent.entity.LegalRecord;
 public interface LegalRecordRepository extends JpaRepository<LegalRecord, Long> {
 
     Optional<LegalRecord> findByPropertyId(Long propertyId);
-<<<<<<< HEAD
 }
-=======
-
-}
->>>>>>> 849a8d6 (Implement Task 4: Due Diligence Report Generation)

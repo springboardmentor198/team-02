@@ -11,9 +11,4 @@ import com.realestate.due_diligence_agent.entity.Ownership;
 public interface OwnershipRepository extends JpaRepository<Ownership, Long> {
 
     Optional<Ownership> findByPropertyId(Long propertyId);
-<<<<<<< HEAD
 }
-=======
-
-}
->>>>>>> 849a8d6 (Implement Task 4: Due Diligence Report Generation)
