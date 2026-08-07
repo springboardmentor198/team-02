@@ -21,6 +21,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import RiskAssessment from "./pages/RiskAssessment";
 import ComparableAnalysis from "./pages/ComparableAnalysis";
 import ValuationComparison from "./pages/ValuationComparison";
+import DueDiligenceReport from "./pages/DueDiligenceReport";
+import Notifications from "./pages/Notifications";
 
 function App() {
   return (
@@ -134,6 +136,26 @@ function App() {
           element={
             <ProtectedRoute>
               <ValuationComparison />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Due Diligence Report (Task 4 + 5) */}
+        <Route
+          path="/reports/:propertyId"
+          element={
+            <ProtectedRoute>
+              <DueDiligenceReport />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Notifications (Task 6) */}
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute>
+              <Notifications />
             </ProtectedRoute>
           }
         />

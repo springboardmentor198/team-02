@@ -1,5 +1,6 @@
 // components/TopHeader.jsx
 import { useNavigate, Link } from "react-router-dom";
+import NotificationBell from "./notifications/NotificationBell";
 
 function TopHeader({ placeholder = "Search by address, parcel ID, or owner..." }) {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ function TopHeader({ placeholder = "Search by address, parcel ID, or owner..." }
         placeholder={placeholder}
       />
       <div className="flex items-center gap-4">
+        <NotificationBell />
         <div className="text-right">
           <p className="text-[11px] uppercase tracking-[2px] text-gray-500">Logged in as</p>
           <p className="font-semibold text-sm">{role}</p>

@@ -12,6 +12,7 @@ const navItems = [
   { label: "RISK ASSESSMENT", path: "/risk-assessment" },
   { label: "COMPARABLE ANALYSIS", path: "/comparable-analysis" },
   { label: "VALUATION COMPARISON", path: "/valuation-comparison" },
+  { label: "NOTIFICATIONS", path: "/notifications" },
 ];
 
 function Sidebar() {
@@ -21,6 +22,7 @@ function Sidebar() {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
     localStorage.removeItem("role");
+    localStorage.removeItem("userId");
     navigate("/login");
   };
 

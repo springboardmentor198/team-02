@@ -410,6 +410,12 @@ function Dashboard() {
                           className="text-blue-600 text-xs mt-2 hover:underline">
                           View Details
                         </button>
+                        <Link
+                          to={`/reports/${p.id}`}
+                          className="text-[#3E63C2] text-xs mt-2 ml-4 hover:underline"
+                        >
+                          Generate Report
+                        </Link>
                       </div>
                       <StatusBadge status={p.verificationStatus}/>
                     </div>

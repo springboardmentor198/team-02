@@ -84,4 +84,111 @@ export const getValuationComparison = async (propertyId) => {
   return response.data;
 };
 
+/* ===========================
+   Due Diligence Report API (Task 4)
+   =========================== */
+
+// Backend: DueDiligenceReportController → GET /api/reports/{propertyId}
+// NOTE: this endpoint generates the report fresh on every call — there is
+// no separate "create" step, so a report page is just this call keyed by
+// propertyId.
+export const getReport = async (propertyId) => {
+  const response = await api.get(`/reports/${propertyId}`);
+  return response.data;
+};
+
+// Backend: DueDiligenceReportController → GET /api/reports/{propertyId}/history
+// Returns raw DueDiligenceReport rows (id, propertyId, propertyTitle,
+// ownerName, totalRiskScore, riskLevel, recommendation, generatedAt).
+export const getReportHistory = async (propertyId) => {
+  const response = await api.get(`/reports/${propertyId}/history`);
+  return response.data;
+};
+
+/* ===========================
+   Report Export API (Task 5)
+   =========================== */
+
+// Backend: ExportController → GET /api/export/pdf/{propertyId} (raw bytes)
+export const exportReportPdf = async (propertyId) => {
+  const response = await api.get(`/export/pdf/${propertyId}`, {
+    responseType: "blob",
+  });
+  return response.data;
+};
+
+// Backend: ExportController → GET /api/export/excel/{propertyId} (raw bytes)
+export const exportReportExcel = async (propertyId) => {
+  const response = await api.get(`/export/excel/${propertyId}`, {
+    responseType: "blob",
+  });
+  return response.data;
+};
+
+// Shared helper: turns a blob response into a real browser download without
+// leaking the created object URL.
+export const downloadBlob = (blob, filename) => {
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.setAttribute("download", filename);
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.URL.revokeObjectURL(url);
+};
+
+/* ===========================
+   Current User (Task 6 dependency)
+   =========================== */
+
+// Backend: UserController → GET /api/users/profile → { id, fullName, email, role }
+// The JWT itself only encodes email (JwtService/AuthResponse have no user
+// id), so notifications — which are scoped by numeric userId — need this
+// looked up once and cached, rather than a backend change.
+export const getCurrentUserId = async () => {
+  const cached = localStorage.getItem("userId");
+  if (cached) return cached;
+  const response = await api.get("/users/profile");
+  const id = response.data?.id;
+  if (id !== undefined && id !== null) {
+    localStorage.setItem("userId", String(id));
+  }
+  return id;
+};
+
+/* ===========================
+   Notification System API (Task 6)
+   =========================== */
+
+// Backend: NotificationController → GET /api/notifications?userId=
+export const getNotifications = async (userId) => {
+  const response = await api.get("/notifications", { params: { userId } });
+  return response.data;
+};
+
+// Backend: NotificationController → GET /api/notifications/unread?userId=
+export const getUnreadNotifications = async (userId) => {
+  const response = await api.get("/notifications/unread", { params: { userId } });
+  return response.data;
+};
+
+// Backend: NotificationController → GET /api/notifications/unread/count?userId=
+// Response: { unreadCount: number }
+export const getUnreadCount = async (userId) => {
+  const response = await api.get("/notifications/unread/count", { params: { userId } });
+  return response.data.unreadCount;
+};
+
+// Backend: NotificationController → PUT /api/notifications/{id}/read
+export const markNotificationRead = async (id) => {
+  const response = await api.put(`/notifications/${id}/read`);
+  return response.data;
+};
+
+// Backend: NotificationController → PUT /api/notifications/read-all?userId=
+export const markAllNotificationsRead = async (userId) => {
+  await api.put("/notifications/read-all", null, { params: { userId } });
+};
+
 export default api;
