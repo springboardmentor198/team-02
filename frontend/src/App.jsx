@@ -8,6 +8,7 @@ import AddProperty from "./pages/AddProperty";
 import AddressValidation from "./pages/AddressValidation";
 import DueDiligence from "./pages/DueDiligence";
 import ReportGeneration from "./pages/ReportGeneration";
+import AuditHistory from "./pages/AuditHistory";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -73,6 +74,15 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <ReportGeneration />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/audit-history"
+                    element={
+                        <ProtectedRoute>
+                            <AuditHistory />
                         </ProtectedRoute>
                     }
                 />

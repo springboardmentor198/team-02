@@ -5,7 +5,8 @@ import {
     FaSearchLocation,
     FaBuilding,
     FaClipboardCheck,
-    FaFileAlt
+    FaFileAlt,
+    FaShieldAlt
 } from "react-icons/fa";
 
 function Sidebar() {
@@ -72,6 +73,20 @@ function Sidebar() {
                 >
                     <FaFileAlt />
                     Reports
+                </Link>
+
+                <div className="border-t border-slate-200 my-3"></div>
+
+                <p className="text-xs text-slate-400 uppercase font-semibold px-1">
+                    Monitoring
+                </p>
+
+                <Link
+                    to="/audit-history"
+                    className="flex items-center gap-3 text-slate-700 hover:text-blue-600 transition"
+                >
+                    <FaShieldAlt />
+                    Audit & History
                 </Link>
 
             </div>
