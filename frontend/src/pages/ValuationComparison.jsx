@@ -108,12 +108,15 @@ function ValuationComparison() {
 
             {!loading && !error && data && cfg && (
               <>
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
-                  <div className="lg:col-span-2">
-                    <ValuationSummaryCard data={data} />
-                  </div>
-                  <StatusCard status={data.valuationStatus} />
-                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
+
+  <div className="lg:col-span-3">
+    <ValuationSummaryCard data={data} />
+  </div>
+
+  <StatusCard status={data.valuationStatus} />
+
+</div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <DifferenceCard

@@ -408,7 +408,7 @@ function Dashboard() {
                         <button
                           onClick={()=>viewPropertyDetails(p.id)}
                           className="text-blue-600 text-xs mt-2 hover:underline">
-                          View Details
+                          Detailed view
                         </button>
                         <Link
                           to={`/reports/${p.id}`}

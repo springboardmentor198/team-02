@@ -5,15 +5,20 @@
 // with a faint dual radial-gradient overlay) — just widened into a hero
 // banner and given real glassmorphism blocks (backdrop-blur) for the
 // input/actions row, since that's where it's most legible against the
-// texture.
-import { ArrowLeft, ShieldQuestion, Sparkles } from "lucide-react";
+// texture. Property selection goes through PropertySelector (searchable by
+// name, no raw Property ID shown) instead of a number input — same pattern
+// ComparableHero/ValuationHero/ReportHero already use.
+import { ArrowLeft, Sparkles } from "lucide-react";
+import PropertySelector from "../PropertySelector";
 import RiskScoreGauge from "./RiskScoreGauge";
 import RiskLevelBadge from "./RiskLevelBadge";
 import { getRiskConfig } from "./riskConfig";
 
 function RiskHero({
+  properties,
+  propertiesLoading,
   propertyId,
-  onPropertyIdChange,
+  onSelectProperty,
   onGenerate,
   loading,
   result,
@@ -22,20 +27,22 @@ function RiskHero({
   const cfg = result ? getRiskConfig(result.riskLevel) : null;
 
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1B2338] via-[#202B47] to-[#2E3A5C] text-white">
+    <div className="relative rounded-2xl bg-gradient-to-br from-[#1B2338] via-[#202B47] to-[#2E3A5C] text-white">
       {/* signature radial texture, same opacity/recipe as Dashboard's summary rail */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.10]"
+        className="pointer-events-none absolute inset-0 opacity-[0.10] rounded-2xl overflow-hidden"
         style={{
           backgroundImage:
             "radial-gradient(circle at 12% 15%, #C89546 0%, transparent 45%), radial-gradient(circle at 92% 80%, #4D7B73 0%, transparent 45%)",
         }}
       />
       {result && cfg && (
-        <div
-          className="pointer-events-none absolute -right-24 -top-24 w-[420px] h-[420px] rounded-full blur-3xl transition-colors duration-700"
-          style={{ backgroundColor: cfg.glow, opacity: 0.35 }}
-        />
+        <div className="pointer-events-none absolute inset-0 rounded-2xl overflow-hidden">
+          <div
+            className="absolute -right-24 -top-24 w-[420px] h-[420px] rounded-full blur-3xl transition-colors duration-700"
+            style={{ backgroundColor: cfg.glow, opacity: 0.35 }}
+          />
+        </div>
       )}
 
       <div className="relative px-8 sm:px-10 py-9">
@@ -66,23 +73,17 @@ function RiskHero({
 
             {/* Glass input/action block */}
             <div className="flex flex-col sm:flex-row gap-3 mt-7">
-              <div className="relative flex-1 sm:max-w-[280px]">
-                <ShieldQuestion
-                  size={16}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40"
-                />
-                <input
-                  type="number"
-                  min="1"
-                  value={propertyId}
-                  onChange={(e) => onPropertyIdChange(e.target.value)}
-                  placeholder="Enter Property ID"
-                  className="w-full h-11 rounded-full border border-white/15 bg-white/10 backdrop-blur-sm pl-10 pr-4 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-1 focus:ring-white/40 focus:bg-white/15 transition"
-                />
-              </div>
+              <PropertySelector
+                properties={properties}
+                loading={propertiesLoading}
+                selectedId={propertyId}
+                onSelect={onSelectProperty}
+                placeholder="Search and select a property..."
+                subtitle={(p) => [p.city, p.state].filter(Boolean).join(", ")}
+              />
               <button
                 onClick={onGenerate}
-                disabled={loading}
+                disabled={loading || !propertyId}
                 className="h-11 px-6 rounded-full bg-white text-[#1B2338] text-sm font-semibold hover:bg-white/90 active:scale-[0.98] transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shrink-0"
               >
                 <Sparkles size={15} />

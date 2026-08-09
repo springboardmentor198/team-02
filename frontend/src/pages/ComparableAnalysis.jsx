@@ -108,21 +108,31 @@ function ComparableAnalysis() {
 
             {!loading && !error && data && (
               <>
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
-                  <PropertySummaryCard data={data} />
+                <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-5">
+
+                <PropertySummaryCard data={data} />
+
+                <div className="flex flex-col gap-5 h-full">
+
                   <StatCard
                     icon={DollarSign}
                     label="Avg. Comparable Price"
                     value={formatCurrency(data.averageComparablePrice)}
                     accent="#3E63C2"
+                    className="flex-1"
                   />
+
                   <StatCard
                     icon={BarChart3}
                     label="Avg. Price / Sq Ft"
                     value={formatCurrency(data.averagePricePerSqFt)}
                     accent="#C89546"
+                    className="flex-1"
                   />
+
                 </div>
+
+              </div>
 
                 <div className="bg-white border border-[#E3DDCE] rounded-2xl p-7">
                   <div className="flex items-center justify-between mb-5">

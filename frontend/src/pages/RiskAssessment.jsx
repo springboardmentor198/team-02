@@ -16,7 +16,7 @@ import {
 
 import Sidebar from "../components/Sidebar";
 import TopHeader from "../components/TopHeader";
-import { generateRiskAssessment, getPropertySummary } from "../services/api";
+import { generateRiskAssessment, getAllProperties, getPropertySummary } from "../services/api";
 
 import RiskHero from "../components/risk/RiskHero";
 import StatCard from "../components/risk/StatCard";
@@ -84,9 +84,11 @@ function buildBreakdown(property) {
 
 function RiskAssessment() {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [propertyId, setPropertyId] = useState(searchParams.get("propertyId") || "");
+  const [properties, setProperties] = useState([]);
+  const [propertiesLoading, setPropertiesLoading] = useState(true);
   const [result, setResult] = useState(null);
   const [property, setProperty] = useState(null);
   const [generatedAt, setGeneratedAt] = useState(null);
@@ -95,9 +97,23 @@ function RiskAssessment() {
   const [error, setError] = useState("");
   const [started, setStarted] = useState(false);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const list = await getAllProperties();
+        setProperties(Array.isArray(list) ? list : []);
+      } catch (e) {
+        console.error("Failed to load properties:", e);
+        setProperties([]);
+      } finally {
+        setPropertiesLoading(false);
+      }
+    })();
+  }, []);
+
   const runAssessment = useCallback(async (id) => {
-    if (!id || !String(id).trim()) {
-      setError("Please enter a Property ID.");
+    if (!id) {
+      setError("Please select a property.");
       return;
     }
     setLoading(true);
@@ -186,8 +202,13 @@ function RiskAssessment() {
         <div className="flex-1 min-h-0 overflow-y-auto">
           <div className="px-10 py-8 max-w-[1200px] mx-auto space-y-6">
             <RiskHero
+              properties={properties}
+              propertiesLoading={propertiesLoading}
               propertyId={propertyId}
-              onPropertyIdChange={setPropertyId}
+              onSelectProperty={(id) => {
+                setPropertyId(id);
+                setSearchParams({ propertyId: id });
+              }}
               onGenerate={() => runAssessment(propertyId)}
               loading={loading}
               result={result}
