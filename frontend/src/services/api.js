@@ -191,4 +191,68 @@ export const markAllNotificationsRead = async (userId) => {
   await api.put("/notifications/read-all", null, { params: { userId } });
 };
 
+/* ===========================
+   Audit Logging & Report History API (Task 7)
+   =========================== */
+
+// Backend: AuditLogController → GET /api/audit-logs (alias: /search)
+// params: { user, property, reportNumber, action, role, status, dateFrom,
+// dateTo, page, size } — axios drops any key whose value is undefined, so
+// callers can pass a filters object as-is without pruning empty fields.
+// Response: PageResponse<AuditLog> → { content, page, size, totalElements, totalPages }
+export const getAuditLogs = async (params) => {
+  const response = await api.get("/audit-logs", { params });
+  return response.data;
+};
+
+// Backend: AuditLogController → GET /api/audit-logs/stats
+// Response: { totalActivities, successfulActions, failedAttempts, todayActivity }
+export const getAuditLogStats = async () => {
+  const response = await api.get("/audit-logs/stats");
+  return response.data;
+};
+
+// Backend: AuditLogController → GET /api/audit-logs/{id}
+export const getAuditLogById = async (id) => {
+  const response = await api.get(`/audit-logs/${id}`);
+  return response.data;
+};
+
+// Backend: ReportHistoryController → GET /api/report-history (alias: /search)
+// params: { reportNumber, property, requestedBy, reportType, status,
+// dateFrom, dateTo, page, size }
+// Response: PageResponse<DueDiligenceReport>
+// NOTE: named distinctly from getReportHistory() above (Task 4's
+// per-property /api/reports/{id}/history) — this is the global,
+// cross-property Task 7 listing behind /api/report-history.
+export const searchReportHistory = async (params) => {
+  const response = await api.get("/report-history", { params });
+  return response.data;
+};
+
+// Backend: ReportHistoryController → GET /api/report-history/stats
+// Response: { totalReports, completedReports, todayReports }
+export const getReportHistoryStats = async () => {
+  const response = await api.get("/report-history/stats");
+  return response.data;
+};
+
+// Backend: ReportHistoryController → GET /api/report-history/{id}
+export const getReportHistoryById = async (id) => {
+  const response = await api.get(`/report-history/${id}`);
+  return response.data;
+};
+
+// Backend: ReportHistoryController → GET /api/report-history/{id}/pdf (raw bytes)
+export const downloadReportHistoryPdf = async (id) => {
+  const response = await api.get(`/report-history/${id}/pdf`, { responseType: "blob" });
+  return response.data;
+};
+
+// Backend: ReportHistoryController → GET /api/report-history/{id}/excel (raw bytes)
+export const downloadReportHistoryExcel = async (id) => {
+  const response = await api.get(`/report-history/${id}/excel`, { responseType: "blob" });
+  return response.data;
+};
+
 export default api;

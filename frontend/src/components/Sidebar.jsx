@@ -13,6 +13,7 @@ const navItems = [
   { label: "COMPARABLE ANALYSIS", path: "/comparable-analysis" },
   { label: "VALUATION COMPARISON", path: "/valuation-comparison" },
   { label: "NOTIFICATIONS", path: "/notifications" },
+  { label: "AUDIT & HISTORY", path: "/audit-history" },
 ];
 
 function Sidebar() {

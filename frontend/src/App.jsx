@@ -23,6 +23,7 @@ import ComparableAnalysis from "./pages/ComparableAnalysis";
 import ValuationComparison from "./pages/ValuationComparison";
 import DueDiligenceReport from "./pages/DueDiligenceReport";
 import Notifications from "./pages/Notifications";
+import AuditHistory from "./pages/AuditHistory";
 
 function App() {
   return (
@@ -156,6 +157,16 @@ function App() {
           element={
             <ProtectedRoute>
               <Notifications />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Audit & History (Task 7) */}
+        <Route
+          path="/audit-history"
+          element={
+            <ProtectedRoute>
+              <AuditHistory />
             </ProtectedRoute>
           }
         />

@@ -1,25 +1,24 @@
 package com.realestate.due_diligence_agent.service;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
+import com.realestate.due_diligence_agent.dto.DueDiligenceReportResponse;
 import com.realestate.due_diligence_agent.entity.AuditLog;
 import com.realestate.due_diligence_agent.entity.DueDiligenceReport;
-import com.realestate.due_diligence_agent.repository.DueDiligenceReportRepository;
-import com.realestate.due_diligence_agent.service.AuditLogService;
-import com.realestate.due_diligence_agent.dto.DueDiligenceReportResponse;
 import com.realestate.due_diligence_agent.entity.FloodZone;
 import com.realestate.due_diligence_agent.entity.LegalRecord;
 import com.realestate.due_diligence_agent.entity.Ownership;
 import com.realestate.due_diligence_agent.entity.Property;
 import com.realestate.due_diligence_agent.entity.PropertyTaxHistory;
 import com.realestate.due_diligence_agent.entity.RiskAssessment;
+import com.realestate.due_diligence_agent.entity.User;
 import com.realestate.due_diligence_agent.entity.Zoning;
+import com.realestate.due_diligence_agent.repository.DueDiligenceReportRepository;
 import com.realestate.due_diligence_agent.repository.FloodZoneRepository;
 import com.realestate.due_diligence_agent.repository.LegalRecordRepository;
 import com.realestate.due_diligence_agent.repository.OwnershipRepository;
@@ -57,6 +56,9 @@ public class DueDiligenceReportServiceImpl implements DueDiligenceReportService 
 
     @Autowired
     private AuditLogService auditLogService;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public DueDiligenceReportResponse generateReport(Long propertyId) {
@@ -119,6 +121,17 @@ public class DueDiligenceReportServiceImpl implements DueDiligenceReportService 
 
 
         });
+
+        // Who's actually generating this — falls back to an unattributed
+        // system entry if called outside a request (e.g. a scheduled job),
+        // rather than the previous hardcoded placeholder user id.
+        User requestedBy = null;
+        try {
+            requestedBy = userService.getLoggedInUser();
+        } catch (Exception ignored) {
+            // no authenticated context available
+        }
+
         // Save report history
         DueDiligenceReport report = new DueDiligenceReport();
         report.setPropertyId(response.getPropertyId());
@@ -128,20 +141,47 @@ public class DueDiligenceReportServiceImpl implements DueDiligenceReportService 
         report.setRiskLevel(response.getRiskLevel());
         report.setRecommendation(response.getRecommendation());
         report.setGeneratedAt(LocalDateTime.now());
+        report.setReportType("DUE_DILIGENCE");
+        report.setStatus("COMPLETED");
+        report.setDownloadCount(0);
+        if (requestedBy != null) {
+            report.setRequestedByUserId(requestedBy.getId());
+            report.setRequestedByName(requestedBy.getFullName());
+        }
 
+        dueDiligenceReportRepository.save(report);
+
+        // Report number depends on the generated id, so it's assigned in a
+        // second save once the row actually has one.
+        report.setReportNumber(buildReportNumber(report));
         dueDiligenceReportRepository.save(report);
 
         // Save audit log
         AuditLog auditLog = new AuditLog();
-        auditLog.setUserId(1L); // Temporary user ID
         auditLog.setPropertyId(propertyId);
         auditLog.setAction("GENERATE_REPORT");
         auditLog.setModule("Due Diligence");
-        auditLog.setDescription("Generated due diligence report for property ID " + propertyId);
-        auditLog.setActionTime(LocalDateTime.now());
+        auditLog.setEntityType("REPORT");
+        auditLog.setEntityId(report.getId());
+        auditLog.setStatus("SUCCESS");
+        auditLog.setDescription("Generated " + report.getReportNumber()
+                + " (due diligence report) for property ID " + propertyId);
 
-        auditLogService.save(auditLog);
+        if (requestedBy != null) {
+            auditLog.setUserId(requestedBy.getId());
+            auditLog.setUsername(requestedBy.getFullName());
+            auditLog.setRole(requestedBy.getRole().name());
+        }
+
+        auditLogService.record(auditLog);
 
         return response;
+    }
+
+    private String buildReportNumber(DueDiligenceReport report) {
+        int year = report.getGeneratedAt() != null
+                ? report.getGeneratedAt().getYear()
+                : LocalDateTime.now().getYear();
+        return "RPT-" + year + "-" + String.format("%06d", report.getId());
     }
 }

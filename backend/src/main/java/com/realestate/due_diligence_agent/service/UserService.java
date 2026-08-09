@@ -17,6 +17,7 @@ import com.realestate.due_diligence_agent.dto.ResetPasswordRequest;
 import com.realestate.due_diligence_agent.dto.UpdateProfileRequest;
 import com.realestate.due_diligence_agent.dto.VerifyOtpRequest;
 import com.realestate.due_diligence_agent.entity.OtpToken;
+import com.realestate.due_diligence_agent.entity.AuditLog;
 import com.realestate.due_diligence_agent.entity.User;
 import com.realestate.due_diligence_agent.exception.BadRequestException;
 import com.realestate.due_diligence_agent.exception.ResourceNotFoundException;
@@ -33,18 +34,21 @@ public class UserService {
     private final JwtService jwtService;
     private final OtpRepository otpRepository;
     private final EmailService emailService;
+    private final AuditLogService auditLogService;
 
     public UserService(UserRepository userRepository,
             PasswordEncoder passwordEncoder,
             JwtService jwtService,
             OtpRepository otpRepository,
-            EmailService emailService) {
+            EmailService emailService,
+            AuditLogService auditLogService) {
 
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.otpRepository = otpRepository;
         this.emailService = emailService;
+        this.auditLogService = auditLogService;
     }
 
     public User register(RegisterRequest request) {
@@ -65,20 +69,49 @@ public class UserService {
 
     public AuthResponse login(LoginRequest request) {
 
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        User user;
+        try {
+            user = userRepository.findByEmail(request.getEmail())
+                    .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        } catch (ResourceNotFoundException ex) {
+            logLoginAttempt(null, request.getEmail(), null, "FAILED", "No account found for this email.");
+            throw ex;
+        }
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            logLoginAttempt(user.getId(), user.getFullName(), user.getRole().name(),
+                    "FAILED", "Incorrect password.");
             throw new UnauthorizedException("Invalid password");
         }
 
         String token = jwtService.generateToken(user.getEmail());
+
+        logLoginAttempt(user.getId(), user.getFullName(), user.getRole().name(),
+                "SUCCESS", "User logged in.");
 
         return new AuthResponse(
                 token,
                 user.getEmail(),
                 user.getRole().name()
         );
+    }
+
+    private void logLoginAttempt(Long userId, String username, String role, String status, String description) {
+        try {
+            AuditLog entry = new AuditLog();
+            entry.setUserId(userId);
+            entry.setUsername(username);
+            entry.setRole(role);
+            entry.setAction("LOGIN");
+            entry.setModule("Auth");
+            entry.setEntityType("USER");
+            entry.setEntityId(userId);
+            entry.setStatus(status);
+            entry.setDescription(description);
+            auditLogService.record(entry);
+        } catch (Exception ignored) {
+            // A logging failure should never block or fail a login attempt.
+        }
     }
 
     public User getLoggedInUser() {
