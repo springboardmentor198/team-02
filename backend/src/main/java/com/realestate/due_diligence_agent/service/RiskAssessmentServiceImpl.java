@@ -59,8 +59,12 @@ public class RiskAssessmentServiceImpl implements RiskAssessmentService {
         Property property = propertyRepository.findById(propertyId)
                 .orElseThrow(() -> new ResourceNotFoundException("Property not found"));
 
-        RiskAssessment risk = new RiskAssessment();
-        risk.setPropertyId(propertyId);
+        RiskAssessment risk = repository.findByPropertyId(propertyId)
+        .orElseGet(() -> {
+            RiskAssessment newRisk = new RiskAssessment();
+            newRisk.setPropertyId(propertyId);
+            return newRisk;
+        });
 
         List<String> recommendations = new ArrayList<>();
 
