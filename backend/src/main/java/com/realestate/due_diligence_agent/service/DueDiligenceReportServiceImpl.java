@@ -18,6 +18,7 @@ import com.realestate.due_diligence_agent.entity.PropertyTaxHistory;
 import com.realestate.due_diligence_agent.entity.RiskAssessment;
 import com.realestate.due_diligence_agent.entity.User;
 import com.realestate.due_diligence_agent.entity.Zoning;
+import com.realestate.due_diligence_agent.notification.NotificationService;
 import com.realestate.due_diligence_agent.repository.DueDiligenceReportRepository;
 import com.realestate.due_diligence_agent.repository.FloodZoneRepository;
 import com.realestate.due_diligence_agent.repository.LegalRecordRepository;
@@ -59,6 +60,9 @@ public class DueDiligenceReportServiceImpl implements DueDiligenceReportService 
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private NotificationService notificationService;
 
     @Override
     public DueDiligenceReportResponse generateReport(Long propertyId) {
@@ -174,6 +178,24 @@ public class DueDiligenceReportServiceImpl implements DueDiligenceReportService 
         }
 
         auditLogService.record(auditLog);
+
+        // Notify the requesting user their report is ready — this is the
+        // call NotificationService.createReportCompletedNotification's own
+        // doc comment says should happen "right after a report finishes
+        // generating", but nothing was actually invoking it, so the bell/
+        // /api/notifications endpoints were always returning an empty list.
+        // Guarded on requestedBy since Notification.userId is NOT NULL and
+        // there's no authenticated user on e.g. a scheduled/system call.
+        if (requestedBy != null) {
+            try {
+                notificationService.createReportCompletedNotification(
+                        requestedBy.getId(), report.getId(), report.getPropertyTitle());
+            } catch (Exception ignored) {
+                // A notification failing to save should never fail report
+                // generation itself — the report and audit log are already
+                // committed above.
+            }
+        }
 
         return response;
     }
