@@ -25,7 +25,7 @@ function Login() {
       localStorage.setItem("token", token);
       localStorage.setItem("email", email);
       localStorage.setItem("role", role);
-      navigate("/dashboard");
+      navigate(role === "ADMIN" ? "/admin/dashboard" : "/dashboard");
     } catch (err) {
       console.log(err);
       setError(

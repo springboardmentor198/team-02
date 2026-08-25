@@ -255,4 +255,75 @@ export const downloadReportHistoryExcel = async (id) => {
   return response.data;
 };
 
+/* ===========================
+   Profile Photo API (Requested Change 4)
+   =========================== */
+
+// Backend: UserController -> POST /api/users/profile/photo (multipart)
+// Response: ProfileResponse { id, fullName, email, role, profileImageUrl }
+export const uploadProfilePhoto = async (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  const response = await api.post("/users/profile/photo", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+  return response.data;
+};
+
+// Backend: UserController -> DELETE /api/users/profile/photo
+export const removeProfilePhoto = async () => {
+  const response = await api.delete("/users/profile/photo");
+  return response.data;
+};
+
+// api.js's baseURL is "http://localhost:8080/api" but uploaded photos are
+// served as static files at the app root (see backend WebConfig), not
+// under /api -- so strip that suffix rather than hardcoding the origin.
+export const resolveUploadUrl = (path) => {
+  if (!path) return null;
+  if (path.startsWith("http")) return path;
+  const base = (import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api").replace(
+    /\/api\/?$/,
+    ""
+  );
+  return `${base}${path}`;
+};
+
+/* ===========================
+   Admin API (ADMIN role only — SecurityConfig maps /api/admin/** to
+   hasRole("ADMIN"), so these calls 403 for any other role)
+   =========================== */
+
+// Backend: AdminController -> GET /api/admin/dashboard/stats
+// Response: { totalUsers, usersByRole, totalProperties, totalReports,
+// reportsLast7Days, pendingReports, totalAuditLogs, auditEventsLast24h,
+// failedAuditEvents, systemHealth, apiUptimePercent }
+export const getAdminDashboardStats = async () => {
+  const response = await api.get("/admin/dashboard/stats");
+  return response.data;
+};
+
+// Backend: AdminController -> GET /api/admin/users
+export const getAdminUsers = async () => {
+  const response = await api.get("/admin/users");
+  return response.data;
+};
+
+// Backend: AdminController -> PUT /api/admin/users/{id}/role  body: { role }
+export const updateAdminUserRole = async (id, role) => {
+  const response = await api.put(`/admin/users/${id}/role`, { role });
+  return response.data;
+};
+
+// Backend: AdminController -> DELETE /api/admin/users/{id}
+export const deleteAdminUser = async (id) => {
+  await api.delete(`/admin/users/${id}`);
+};
+
+// Backend: AdminController -> GET /api/admin/system-health
+export const getAdminSystemHealth = async () => {
+  const response = await api.get("/admin/system-health");
+  return response.data;
+};
+
 export default api;

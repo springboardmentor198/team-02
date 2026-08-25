@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-import Login from "./pages/login/Login";
+import Login from "./pages/login/login";
 import Register from "./pages/register/Register";
 
 import Dashboard from "./pages/Dashboard";
@@ -18,12 +18,12 @@ import VerifyOtp from "./pages/VerifyOtp";
 import ResetPassword from "./pages/ResetPassword";
 
 import ProtectedRoute from "./components/ProtectedRoute";
-import RiskAssessment from "./pages/RiskAssessment";
-import ComparableAnalysis from "./pages/ComparableAnalysis";
-import ValuationComparison from "./pages/ValuationComparison";
+import AnalyticsWorkspace from "./pages/AnalyticsWorkspace";
 import DueDiligenceReport from "./pages/DueDiligenceReport";
 import Notifications from "./pages/Notifications";
 import AuditHistory from "./pages/AuditHistory";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import UserManagement from "./pages/admin/UserManagement";
 
 function App() {
   return (
@@ -114,31 +114,26 @@ function App() {
             </ProtectedRoute>
           }
         />
+        {/* Risk Assessment + Comparable Analysis + Valuation Comparison now
+            live together as tabs in one Analytics workspace. Old paths
+            redirect so any existing links/bookmarks still land somewhere
+            sensible instead of 404-ing. */}
         <Route
-        path="/risk-assessment"
-        element={
-            <ProtectedRoute>
-                <RiskAssessment />
-            </ProtectedRoute>
-           }
-         />
-
-        <Route
-          path="/comparable-analysis"
+          path="/analytics"
           element={
             <ProtectedRoute>
-              <ComparableAnalysis />
+              <AnalyticsWorkspace />
             </ProtectedRoute>
           }
         />
-
+        <Route path="/risk-assessment" element={<Navigate to="/analytics?tab=risk" replace />} />
+        <Route
+          path="/comparable-analysis"
+          element={<Navigate to="/analytics?tab=comparables" replace />}
+        />
         <Route
           path="/valuation-comparison"
-          element={
-            <ProtectedRoute>
-              <ValuationComparison />
-            </ProtectedRoute>
-          }
+          element={<Navigate to="/analytics?tab=valuation" replace />}
         />
 
         {/* Due Diligence Report (Task 4 + 5) */}
@@ -161,12 +156,34 @@ function App() {
           }
         />
 
-        {/* Audit & History (Task 7) */}
+        {/* Audit & History (Task 7) — admin-only. The backend is the real
+            boundary (SecurityConfig: /api/audit-logs/** -> hasRole("ADMIN")),
+            this just stops a non-admin from seeing the page shell before its
+            API calls 403. */}
         <Route
           path="/audit-history"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRoles={["ADMIN"]}>
               <AuditHistory />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Admin (ADMIN role only -- see ProtectedRoute allowedRoles) */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={["ADMIN"]}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute allowedRoles={["ADMIN"]}>
+              <UserManagement />
             </ProtectedRoute>
           }
         />

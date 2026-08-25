@@ -1,5 +1,7 @@
 package com.realestate.due_diligence_agent.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -24,11 +26,19 @@ public class User {
     private String email;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    // Relative filename of the uploaded avatar (e.g. "3-8f2c1e.jpg"), stored
+    // under the app.upload.profile-images-dir directory. Null = no photo,
+    // frontend falls back to the initials avatar. See ProfileImageController
+    // / UserService#uploadProfilePhoto for how this is written.
+    @Column(name = "profile_image_path")
+    private String profileImagePath;
 
     public User() {
     }
@@ -67,5 +77,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getProfileImagePath() {
+        return profileImagePath;
+    }
+
+    public void setProfileImagePath(String profileImagePath) {
+        this.profileImagePath = profileImagePath;
     }
 }

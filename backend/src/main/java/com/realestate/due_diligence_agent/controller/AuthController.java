@@ -13,6 +13,8 @@ import com.realestate.due_diligence_agent.dto.VerifyOtpRequest;
 import com.realestate.due_diligence_agent.entity.User;
 import com.realestate.due_diligence_agent.service.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -24,40 +26,32 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody RegisterRequest request) {
+    public ResponseEntity<User> registerUser(@Valid @RequestBody RegisterRequest request) {
         User savedUser = userService.register(request);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-
-        System.out.println("========== LOGIN REQUEST ==========");
-        System.out.println("Email = " + request.getEmail());
-
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         AuthResponse response = userService.login(request);
-
-        System.out.println("========== TOKEN ==========");
-        System.out.println(response.getToken());
-
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/forgot-password")
-public ResponseEntity<String> forgotPassword(@RequestBody ForgotPasswordRequest request) {
-    userService.forgotPassword(request);
-    return ResponseEntity.ok("OTP sent successfully.");
-}
+    public ResponseEntity<String> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
+        userService.forgotPassword(request);
+        return ResponseEntity.ok("OTP sent successfully.");
+    }
 
-@PostMapping("/verify-otp")
-public ResponseEntity<String> verifyOtp(@RequestBody VerifyOtpRequest request) {
-    userService.verifyOtp(request);
-    return ResponseEntity.ok("OTP verified successfully.");
-}
+    @PostMapping("/verify-otp")
+    public ResponseEntity<String> verifyOtp(@Valid @RequestBody VerifyOtpRequest request) {
+        userService.verifyOtp(request);
+        return ResponseEntity.ok("OTP verified successfully.");
+    }
 
-@PostMapping("/reset-password")
-public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) {
-    userService.resetPassword(request);
-    return ResponseEntity.ok("Password reset successfully.");
-}
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
+        userService.resetPassword(request);
+        return ResponseEntity.ok("Password reset successfully.");
+    }
 }

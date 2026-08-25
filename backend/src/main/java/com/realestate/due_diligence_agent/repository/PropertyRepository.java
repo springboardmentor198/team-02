@@ -21,4 +21,12 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     Optional<Property> findByIdAndUser(Long id, User user);
 
     List<Property> findByCityAndPropertyType(String city, String propertyType);
+
+    // Marketplace-wide (not user-scoped) filters: this is a shared property
+    // directory, so every authenticated user should be able to browse and
+    // filter every listed property, not just their own. Case-insensitive
+    // since these back free-text-ish filter dropdowns/search.
+    List<Property> findByCityIgnoreCase(String city);
+
+    List<Property> findByPropertyTypeIgnoreCase(String propertyType);
 }

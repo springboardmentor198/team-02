@@ -18,6 +18,7 @@ import com.realestate.due_diligence_agent.entity.PropertyTaxHistory;
 import com.realestate.due_diligence_agent.entity.RiskAssessment;
 import com.realestate.due_diligence_agent.entity.User;
 import com.realestate.due_diligence_agent.entity.Zoning;
+import com.realestate.due_diligence_agent.exception.ResourceNotFoundException;
 import com.realestate.due_diligence_agent.notification.NotificationService;
 import com.realestate.due_diligence_agent.repository.DueDiligenceReportRepository;
 import com.realestate.due_diligence_agent.repository.FloodZoneRepository;
@@ -27,6 +28,7 @@ import com.realestate.due_diligence_agent.repository.PropertyRepository;
 import com.realestate.due_diligence_agent.repository.PropertyTaxHistoryRepository;
 import com.realestate.due_diligence_agent.repository.RiskAssessmentRepository;
 import com.realestate.due_diligence_agent.repository.ZoningRepository;
+
 
 @Service
 public class DueDiligenceReportServiceImpl implements DueDiligenceReportService {
@@ -68,7 +70,7 @@ public class DueDiligenceReportServiceImpl implements DueDiligenceReportService 
     public DueDiligenceReportResponse generateReport(Long propertyId) {
 
         Property property = propertyRepository.findById(propertyId)
-                .orElseThrow(() -> new RuntimeException("Property not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Property not found with id: " + propertyId));
 
         DueDiligenceReportResponse response = new DueDiligenceReportResponse();
 

@@ -4,7 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +33,8 @@ import com.realestate.due_diligence_agent.repository.PropertyRepository;
 
 @Service
 public class PropertyService {
+
+    private static final Logger logger = LoggerFactory.getLogger(PropertyService.class);
 
     private final PropertyRepository propertyRepository;
     private final AddressValidationService addressValidationService;
@@ -77,13 +82,31 @@ EnvironmentalService environmentalService     ) {
     }
 
     // ==========================================
+    // Build a complete address string for geocoding
+    // ==========================================
+    // AddressValidationService.validateAddress() requires the geocoder to
+    // resolve a house number, road, locality (city) AND country. The
+    // "address" field on PropertyRequest is only the street portion (e.g.
+    // "221B Baker Street") — city/state live in their own fields — so it
+    // must never be sent to the geocoder on its own; a bare street address
+    // is frequently too ambiguous to resolve to a fully-specific match.
+    // Combining address + city + state here mirrors the same pattern
+    // already used for display/export purposes (see the joinNonBlank(...)
+    // helper in ExcelExportService/PdfExportService).
+    private String buildFullAddress(PropertyRequest request) {
+        return Stream.of(request.getAddress(), request.getCity(), request.getState())
+                .filter(part -> part != null && !part.isBlank())
+                .collect(Collectors.joining(", "));
+    }
+
+    // ==========================================
     // Add Property
     // ==========================================
     @Transactional
     public Property addProperty(PropertyRequest request) {
 
         AddressValidationResponse validation
-                = addressValidationService.validateAddress(request.getAddress());
+                = addressValidationService.validateAddress(buildFullAddress(request));
 
         if (!validation.isValid()) {
             throw new BadRequestException(validation.getMessage());
@@ -173,36 +196,20 @@ EnvironmentalService environmentalService     ) {
     // ==========================================
     // Get All Properties
     // ==========================================
+    // Marketplace-wide: every authenticated user (buyer, agent, etc.) can
+    // browse every listed property, not just ones they added themselves.
     public List<Property> getAllProperties() {
-        return propertyRepository.findByUser(getLoggedInUser());
+        return propertyRepository.findAll();
     }
 
     // ==========================================
     // Get Property By Id
     // ==========================================
+    // Read-only lookup, open to any authenticated user (marketplace model).
+    // Ownership is still enforced for mutations (verify/update/delete below).
     public Property getPropertyById(Long id) {
-
-        User user = getLoggedInUser();
-
-        System.out.println("========== GET PROPERTY ==========");
-        System.out.println("Logged In User ID : " + user.getId());
-        System.out.println("Logged In Email   : " + user.getEmail());
-
-        Property property = propertyRepository.findById(id)
+        return propertyRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Property not found"));
-
-        System.out.println("Property ID       : " + property.getId());
-        System.out.println("Property Owner ID : " + property.getUser().getId());
-        System.out.println("Property Owner    : " + property.getUser().getEmail());
-
-        if (!property.getUser().getId().equals(user.getId())) {
-            System.out.println("ACCESS DENIED");
-            throw new AccessDeniedException("Access denied");
-        }
-
-        System.out.println("ACCESS GRANTED");
-
-        return property;
     }
 
     // ==========================================
@@ -217,7 +224,7 @@ EnvironmentalService environmentalService     ) {
                 .orElseThrow(() -> new ResourceNotFoundException("Property not found"));
 
         AddressValidationResponse validation
-                = addressValidationService.validateAddress(request.getAddress());
+                = addressValidationService.validateAddress(buildFullAddress(request));
 
         if (!validation.isValid()) {
             throw new BadRequestException(validation.getMessage());
@@ -303,13 +310,8 @@ EnvironmentalService environmentalService     ) {
 
         User user = getLoggedInUser();
 
-        System.out.println("========== DELETE PROPERTY ==========");
-        System.out.println("Logged In User : " + user.getEmail());
-
         Property property = propertyRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Property not found"));
-
-        System.out.println("Property Owner : " + property.getUser().getEmail());
 
         if (!property.getUser().getId().equals(user.getId())) {
             throw new AccessDeniedException("Access denied");
@@ -317,33 +319,24 @@ EnvironmentalService environmentalService     ) {
 
         propertyRepository.delete(property);
 
-        System.out.println("Property Deleted Successfully");
+        logger.debug("Property {} deleted by user {}", id, user.getId());
     }
 
     // ==========================================
     // Filter by City
     // ==========================================
+    // Marketplace-wide (see getAllProperties). Pushed down to Postgres via a
+    // case-insensitive derived query rather than loading everything and
+    // filtering in Java.
     public List<Property> getPropertiesByCity(String city) {
-
-        return propertyRepository.findByUser(getLoggedInUser())
-                .stream()
-                .filter(property
-                        -> property.getCity() != null
-                && property.getCity().equalsIgnoreCase(city))
-                .toList();
+        return propertyRepository.findByCityIgnoreCase(city);
     }
 
     // ==========================================
     // Filter by Property Type
     // ==========================================
     public List<Property> getPropertiesByType(String propertyType) {
-
-        return propertyRepository.findByUser(getLoggedInUser())
-                .stream()
-                .filter(property
-                        -> property.getPropertyType() != null
-                && property.getPropertyType().equalsIgnoreCase(propertyType))
-                .toList();
+        return propertyRepository.findByPropertyTypeIgnoreCase(propertyType);
     }
 
     // ==========================================
@@ -351,22 +344,16 @@ EnvironmentalService environmentalService     ) {
     // ==========================================
     public List<Property> getPropertiesByPrice(Double minPrice,
             Double maxPrice) {
-
-        return propertyRepository.findByUser(getLoggedInUser())
-                .stream()
-                .filter(property
-                        -> property.getPrice() != null
-                && property.getPrice() >= minPrice
-                && property.getPrice() <= maxPrice)
-                .toList();
+        return propertyRepository.findByPriceBetween(minPrice, maxPrice);
     }
 
     // ==========================================
     // Property Statistics
     // ==========================================
+    // Marketplace-wide stats (see getAllProperties).
     public Map<String, Long> getPropertyTypeStats() {
 
-        return propertyRepository.findByUser(getLoggedInUser())
+        return propertyRepository.findAll()
                 .stream()
                 .collect(Collectors.groupingBy(
                         Property::getPropertyType,
@@ -379,14 +366,8 @@ EnvironmentalService environmentalService     ) {
     @Transactional(readOnly = true)
     public PropertyDetailsResponse getPropertyDetailsById(Long id) {
 
-        User loggedInUser = getLoggedInUser();
-
         Property property = propertyRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Property not found"));
-
-        if (!property.getUser().getId().equals(loggedInUser.getId())) {
-            throw new AccessDeniedException("Access denied");
-        }
 
         // Every section below is read straight off the Property entity that
         // was just loaded from PostgreSQL — no mock/generated values.

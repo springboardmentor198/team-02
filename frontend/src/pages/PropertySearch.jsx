@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import TopHeader from "../components/TopHeader";
 import StatusBadge from "../components/StatusBadge";
-import api from "../services/api";
+import api, { getCurrentUserId } from "../services/api";
 
 const PROPERTY_TYPES = ["ALL", "Residential", "Commercial", "Industrial", "Land"];
 const STATUS_OPTIONS = ["ALL", "Pending", "Verified", "Needs Review", "Rejected"];
@@ -19,17 +19,23 @@ function PropertySearch() {
   const [error, setError] = useState("");
   const [selected, setSelected] = useState(null);
   const [verifying, setVerifying] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState(null);
 
   const fetchProperties = async () => {
     setLoading(true);
     setError("");
     try {
-      // Backend only exposes /properties (all, scoped to the logged-in user)
-      // plus separate /city, /type, /price filter endpoints — there's no
-      // combined free-text search, so we fetch everything once and filter
+      // Backend exposes /properties as a marketplace-wide listing (every
+      // user's properties, not just the ones you added) plus separate
+      // /city, /type, /price filter endpoints — there's no combined
+      // free-text search, so we fetch everything once and filter
       // client-side below.
-      const res = await api.get("/properties");
+      const [res, userId] = await Promise.all([
+        api.get("/properties"),
+        getCurrentUserId(),
+      ]);
       setProperties(res.data);
+      setCurrentUserId(userId != null ? String(userId) : null);
     } catch (e) {
       console.log(e);
       setError("Couldn't load your properties. Is the backend running?");
@@ -57,7 +63,13 @@ function PropertySearch() {
     });
   }, [properties, query, propertyType, status]);
 
+  const isOwnProperty = (property) =>
+    currentUserId != null &&
+    property?.user?.id != null &&
+    String(property.user.id) === currentUserId;
+
   const handleVerify = async (property) => {
+    if (!isOwnProperty(property)) return;
     setVerifying(true);
     try {
       // Backend: PropertyController.verifyProperty → POST /api/properties/{id}/verify
@@ -152,7 +164,7 @@ function PropertySearch() {
             ) : filtered.length === 0 ? (
               <div className="text-center py-16 text-gray-500 text-sm">
                 {properties.length === 0
-                  ? "You haven't added any properties yet."
+                  ? "No properties have been listed yet."
                   : "No properties match your search or filters."}
               </div>
             ) : (
@@ -207,13 +219,19 @@ function PropertySearch() {
               )}
             </div>
             <div className="flex flex-wrap gap-3 mt-6">
-              <button
-                onClick={() => handleVerify(selected)}
-                disabled={verifying}
-                className="flex-1 h-10 rounded-full bg-[#1B2338] text-white text-sm font-medium hover:bg-[#2B3450] disabled:opacity-60"
-              >
-                {verifying ? "Verifying…" : "Run Verification"}
-              </button>
+              {isOwnProperty(selected) ? (
+                <button
+                  onClick={() => handleVerify(selected)}
+                  disabled={verifying}
+                  className="flex-1 h-10 rounded-full bg-[#1B2338] text-white text-sm font-medium hover:bg-[#2B3450] disabled:opacity-60"
+                >
+                  {verifying ? "Verifying…" : "Run Verification"}
+                </button>
+              ) : (
+                <span className="flex-1 flex items-center justify-center text-xs text-gray-400 italic">
+                  Listed by another user — verification is owner-only
+                </span>
+              )}
 
               <button
                 onClick={() => navigate(`/properties/${selected.id}/flood-zone`)}

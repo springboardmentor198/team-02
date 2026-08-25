@@ -1,0 +1,7 @@
+com\realestate\due_diligence_agent\controller\AuthControllerIntegrationTest.class
+com\realestate\due_diligence_agent\service\RiskAssessmentServiceImplTest.class
+com\realestate\due_diligence_agent\workflow\DueDiligenceWorkflowSystemTest.class
+com\realestate\due_diligence_agent\controller\PropertyControllerIntegrationTest.class
+com\realestate\due_diligence_agent\service\AddressValidationServiceTest.class
+com\realestate\due_diligence_agent\DueDiligenceAgentApplicationTests.class
+com\realestate\due_diligence_agent\service\VerificationServiceTest.class

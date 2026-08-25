@@ -1,12 +1,15 @@
 package com.realestate.due_diligence_agent.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.realestate.due_diligence_agent.dto.ChangePasswordRequest;
 import com.realestate.due_diligence_agent.dto.ProfileResponse;
@@ -40,7 +43,8 @@ public class UserController {
                 user.getId(),
                 user.getFullName(),
                 user.getEmail(),
-                user.getRole().name()
+                user.getRole().name(),
+                userService.getProfileImageUrl(user)
         );
 
         return ResponseEntity.ok(response);
@@ -59,7 +63,47 @@ public class UserController {
                 updatedUser.getId(),
                 updatedUser.getFullName(),
                 updatedUser.getEmail(),
-                updatedUser.getRole().name()
+                updatedUser.getRole().name(),
+                userService.getProfileImageUrl(updatedUser)
+        );
+
+        return ResponseEntity.ok(response);
+    }
+
+    // ==========================
+    // Upload / Replace Profile Photo (Requested Change 4)
+    // ==========================
+    @PostMapping("/profile/photo")
+    public ResponseEntity<ProfileResponse> uploadProfilePhoto(
+            @RequestParam("file") MultipartFile file) {
+
+        User updatedUser = userService.uploadProfilePhoto(file);
+
+        ProfileResponse response = new ProfileResponse(
+                updatedUser.getId(),
+                updatedUser.getFullName(),
+                updatedUser.getEmail(),
+                updatedUser.getRole().name(),
+                userService.getProfileImageUrl(updatedUser)
+        );
+
+        return ResponseEntity.ok(response);
+    }
+
+    // ==========================
+    // Remove Profile Photo
+    // ==========================
+    @DeleteMapping("/profile/photo")
+    public ResponseEntity<ProfileResponse> removeProfilePhoto() {
+
+        User updatedUser = userService.removeProfilePhoto();
+
+        ProfileResponse response = new ProfileResponse(
+                updatedUser.getId(),
+                updatedUser.getFullName(),
+                updatedUser.getEmail(),
+                updatedUser.getRole().name(),
+                userService.getProfileImageUrl(updatedUser)
         );
 
         return ResponseEntity.ok(response);

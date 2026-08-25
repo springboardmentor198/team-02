@@ -3,6 +3,8 @@ package com.realestate.due_diligence_agent.security;
 import java.io.IOException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,6 +24,8 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
+    private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
+
     private final JwtService jwtService;
     private final UserRepository userRepository;
 
@@ -40,9 +44,7 @@ public class JwtFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain)
             throws ServletException, IOException {
-        System.out.println("========== JWT FILTER ==========");
-        System.out.println("URI: " + request.getRequestURI());
-        System.out.println("Authorization Header: " + request.getHeader("Authorization"));
+        logger.debug("Processing JWT filter for URI: {}", request.getRequestURI());
 
         String authHeader = request.getHeader("Authorization");
 
@@ -54,17 +56,10 @@ public class JwtFilter extends OncePerRequestFilter {
         String token = authHeader.substring(7);
 
         try {
-
-            System.out.println("========== JWT FILTER ==========");
-
             String email = jwtService.extractEmail(token);
-
-            System.out.println("Extracted Email: " + email);
 
             User user = userRepository.findByEmail(email)
                     .orElseThrow(() -> new RuntimeException("User not found"));
-
-            System.out.println("User Found: " + user.getEmail());
 
             List<GrantedAuthority> authorities = List.of(
                     new SimpleGrantedAuthority("ROLE_" + user.getRole().name())
@@ -82,12 +77,14 @@ public class JwtFilter extends OncePerRequestFilter {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            System.out.println("Authentication Set Successfully");
+            logger.debug("Authentication set for user id {}", user.getId());
 
         } catch (Exception e) {
-
-            System.out.println("========== JWT ERROR ==========");
-            e.printStackTrace();
+            // Never log the token itself. Just note that authentication failed;
+            // the downstream Spring Security authorization rules will reject
+            // the request with 401/403 as appropriate.
+            logger.debug("JWT authentication failed for request {}: {}",
+                    request.getRequestURI(), e.getMessage());
 
             SecurityContextHolder.clearContext();
         }

@@ -16,7 +16,7 @@ import ValuationSkeleton from "../components/valuation/ValuationSkeleton";
 import EmptyState from "../components/valuation/EmptyState";
 import { getValuationConfig } from "../components/valuation/valuationConfig";
 
-function ValuationComparison() {
+function ValuationComparison({ embedded = false } = {}) {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -79,16 +79,8 @@ function ValuationComparison() {
 
   const cfg = data ? getValuationConfig(data.valuationStatus) : null;
 
-  return (
-    <div className="h-screen flex bg-[#EFEAE0] overflow-hidden">
-      <Sidebar />
-      <main className="flex-1 ml-[220px] h-screen flex flex-col overflow-hidden">
-        <div className="shrink-0">
-          <TopHeader placeholder="Search by address, parcel ID, or owner..." />
-        </div>
-
-        <div className="flex-1 min-h-0 overflow-y-auto">
-          <div className="px-10 py-8 max-w-[1200px] mx-auto space-y-6">
+  const body = (
+    <div className="px-10 py-8 max-w-[1200px] mx-auto space-y-6">
             <ValuationHero
               properties={properties}
               propertiesLoading={propertiesLoading}
@@ -147,8 +139,19 @@ function ValuationComparison() {
                 <RecommendationPanel status={data.valuationStatus} />
               </>
             )}
-          </div>
+    </div>
+  );
+
+  if (embedded) return body;
+
+  return (
+    <div className="h-screen flex bg-[#EFEAE0] overflow-hidden">
+      <Sidebar />
+      <main className="flex-1 ml-[220px] h-screen flex flex-col overflow-hidden">
+        <div className="shrink-0">
+          <TopHeader placeholder="Search by address, parcel ID, or owner..." />
         </div>
+        <div className="flex-1 min-h-0 overflow-y-auto">{body}</div>
       </main>
     </div>
   );

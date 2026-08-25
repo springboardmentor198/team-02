@@ -17,7 +17,7 @@ import EmptyState from "../components/comparable/EmptyState";
 import NoComparablesFound from "../components/comparable/NoComparablesFound";
 import { formatCurrency } from "../utils/format";
 
-function ComparableAnalysis() {
+function ComparableAnalysis({ embedded = false } = {}) {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -80,16 +80,8 @@ function ComparableAnalysis() {
 
   const comparables = data?.comparableProperties || [];
 
-  return (
-    <div className="h-screen flex bg-[#EFEAE0] overflow-hidden">
-      <Sidebar />
-      <main className="flex-1 ml-[220px] h-screen flex flex-col overflow-hidden">
-        <div className="shrink-0">
-          <TopHeader placeholder="Search by address, parcel ID, or owner..." />
-        </div>
-
-        <div className="flex-1 min-h-0 overflow-y-auto">
-          <div className="px-10 py-8 max-w-[1200px] mx-auto space-y-6">
+  const body = (
+    <div className="px-10 py-8 max-w-[1200px] mx-auto space-y-6">
             <ComparableHero
               properties={properties}
               propertiesLoading={propertiesLoading}
@@ -157,8 +149,19 @@ function ComparableAnalysis() {
                 </div>
               </>
             )}
-          </div>
+    </div>
+  );
+
+  if (embedded) return body;
+
+  return (
+    <div className="h-screen flex bg-[#EFEAE0] overflow-hidden">
+      <Sidebar />
+      <main className="flex-1 ml-[220px] h-screen flex flex-col overflow-hidden">
+        <div className="shrink-0">
+          <TopHeader placeholder="Search by address, parcel ID, or owner..." />
         </div>
+        <div className="flex-1 min-h-0 overflow-y-auto">{body}</div>
       </main>
     </div>
   );

@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.realestate.due_diligence_agent.controller.PropertyControllerIntegrationTest" time="6.968" tests="10" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="25"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\K.Durga Prasad\Desktop\internship\team-02\backend\target\test-classes;C:\Users\K.Durga Prasad\Desktop\internship\team-02\backend\target\classes;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.5.4\spring-boot-starter-web-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter\3.5.4\spring-boot-starter-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.5.4\spring-boot-starter-logging-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\ch\qos\logback\logback-classic\1.5.18\logback-classic-1.5.18.jar;C:\Users\K.Durga Prasad\.m2\repository\ch\qos\logback\logback-core\1.5.18\logback-core-1.5.18.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.24.3\log4j-to-slf4j-2.24.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\slf4j\jul-to-slf4j\2.0.17\jul-to-slf4j-2.0.17.jar;C:\Users\K.Durga Prasad\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\K.Durga Prasad\.m2\repository\org\yaml\snakeyaml\2.4\snakeyaml-2.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.5.4\spring-boot-starter-json-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.19.2\jackson-datatype-jdk8-2.19.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.19.2\jackson-datatype-jsr310-2.19.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.19.2\jackson-module-parameter-names-2.19.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.5.4\spring-boot-starter-tomcat-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.43\tomcat-embed-core-10.1.43.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.43\tomcat-embed-websocket-10.1.43.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-web\6.2.9\spring-web-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-beans\6.2.9\spring-beans-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\io\micrometer\micrometer-observation\1.15.2\micrometer-observation-1.15.2.jar;C:\Users\K.Durga Prasad\.m2\repository\io\micrometer\micrometer-commons\1.15.2\micrometer-commons-1.15.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-webmvc\6.2.9\spring-webmvc-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-context\6.2.9\spring-context-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-expression\6.2.9\spring-expression-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.5.4\spring-boot-starter-data-jpa-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.5.4\spring-boot-starter-jdbc-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\com\zaxxer\HikariCP\6.3.1\HikariCP-6.3.1.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-jdbc\6.2.9\spring-jdbc-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\hibernate\orm\hibernate-core\6.6.22.Final\hibernate-core-6.6.22.Final.jar;C:\Users\K.Durga Prasad\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\K.Durga Prasad\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\K.Durga Prasad\.m2\repository\org\jboss\logging\jboss-logging\3.6.1.Final\jboss-logging-3.6.1.Final.jar;C:\Users\K.Durga Prasad\.m2\repository\org\hibernate\common\hibernate-commons-annotations\7.0.3.Final\hibernate-commons-annotations-7.0.3.Final.jar;C:\Users\K.Durga Prasad\.m2\repository\io\smallrye\jandex\3.2.0\jandex-3.2.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\fasterxml\classmate\1.7.0\classmate-1.7.0.jar;C:\Users\K.Durga Prasad\.m2\repository\net\bytebuddy\byte-buddy\1.17.6\byte-buddy-1.17.6.jar;C:\Users\K.Durga Prasad\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.5\jaxb-runtime-4.0.5.jar;C:\Users\K.Durga Prasad\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.5\jaxb-core-4.0.5.jar;C:\Users\K.Durga Prasad\.m2\repository\org\glassfish\jaxb\txw2\4.0.5\txw2-4.0.5.jar;C:\Users\K.Durga Prasad\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\K.Durga Prasad\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\K.Durga Prasad\.m2\repository\org\antlr\antlr4-runtime\4.13.0\antlr4-runtime-4.13.0.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\data\spring-data-jpa\3.5.2\spring-data-jpa-3.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\data\spring-data-commons\3.5.2\spring-data-commons-3.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-orm\6.2.9\spring-orm-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-tx\6.2.9\spring-tx-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\slf4j\slf4j-api\2.0.17\slf4j-api-2.0.17.jar;C:\Users\K.Durga Prasad\.m2\repository\com\github\librepdf\openpdf\1.3.39\openpdf-1.3.39.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\poi\poi-ooxml\5.2.5\poi-ooxml-5.2.5.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\poi\poi\5.2.5\poi-5.2.5.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\K.Durga Prasad\.m2\repository\com\zaxxer\SparseBitSet\1.3\SparseBitSet-1.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\poi\poi-ooxml-lite\5.2.5\poi-ooxml-lite-5.2.5.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\xmlbeans\xmlbeans\5.2.0\xmlbeans-5.2.0.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\commons\commons-compress\1.25.0\commons-compress-1.25.0.jar;C:\Users\K.Durga Prasad\.m2\repository\commons-io\commons-io\2.15.0\commons-io-2.15.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\github\virtuald\curvesapi\1.08\curvesapi-1.08.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\retry\spring-retry\2.0.12\spring-retry-2.0.12.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-aspects\6.2.9\spring-aspects-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\aspectj\aspectjweaver\1.9.24\aspectjweaver-1.9.24.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-security\3.5.4\spring-boot-starter-security-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-aop\6.2.9\spring-aop-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\security\spring-security-config\6.5.2\spring-security-config-6.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\security\spring-security-web\6.5.2\spring-security-web-6.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.5.4\spring-boot-starter-validation-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.43\tomcat-embed-el-10.1.43.jar;C:\Users\K.Durga Prasad\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.2.Final\hibernate-validator-8.0.2.Final.jar;C:\Users\K.Durga Prasad\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\postgresql\postgresql\42.7.7\postgresql-42.7.7.jar;C:\Users\K.Durga Prasad\.m2\repository\org\checkerframework\checker-qual\3.49.3\checker-qual-3.49.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\projectlombok\lombok\1.18.38\lombok-1.18.38.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-devtools\3.5.4\spring-boot-devtools-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot\3.5.4\spring-boot-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.5.4\spring-boot-autoconfigure-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\io\jsonwebtoken\jjwt-api\0.12.6\jjwt-api-0.12.6.jar;C:\Users\K.Durga Prasad\.m2\repository\io\jsonwebtoken\jjwt-impl\0.12.6\jjwt-impl-0.12.6.jar;C:\Users\K.Durga Prasad\.m2\repository\io\jsonwebtoken\jjwt-jackson\0.12.6\jjwt-jackson-0.12.6.jar;C:\Users\K.Durga Prasad\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.19.2\jackson-databind-2.19.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.19.2\jackson-annotations-2.19.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.5.4\spring-boot-starter-test-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-test\3.5.4\spring-boot-test-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.5.4\spring-boot-test-autoconfigure-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\K.Durga Prasad\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\K.Durga Prasad\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\K.Durga Prasad\.m2\repository\net\minidev\json-smart\2.5.2\json-smart-2.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\net\minidev\accessors-smart\2.5.2\accessors-smart-2.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\ow2\asm\asm\9.7.1\asm-9.7.1.jar;C:\Users\K.Durga Prasad\.m2\repository\org\assertj\assertj-core\3.27.3\assertj-core-3.27.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\awaitility\awaitility\4.2.2\awaitility-4.2.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\hamcrest\hamcrest\3.0\hamcrest-3.0.jar;C:\Users\K.Durga Prasad\.m2\repository\org\junit\jupiter\junit-jupiter\5.12.2\junit-jupiter-5.12.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.12.2\junit-jupiter-api-5.12.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\K.Durga Prasad\.m2\repository\org\junit\platform\junit-platform-commons\1.12.2\junit-platform-commons-1.12.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.12.2\junit-jupiter-params-5.12.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.12.2\junit-jupiter-engine-5.12.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\junit\platform\junit-platform-engine\1.12.2\junit-platform-engine-1.12.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\mockito\mockito-core\5.17.0\mockito-core-5.17.0.jar;C:\Users\K.Durga Prasad\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.6\byte-buddy-agent-1.17.6.jar;C:\Users\K.Durga Prasad\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\mockito\mockito-junit-jupiter\5.17.0\mockito-junit-jupiter-5.17.0.jar;C:\Users\K.Durga Prasad\.m2\repository\org\skyscreamer\jsonassert\1.5.3\jsonassert-1.5.3.jar;C:\Users\K.Durga Prasad\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-core\6.2.9\spring-core-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-jcl\6.2.9\spring-jcl-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-test\6.2.9\spring-test-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\xmlunit\xmlunit-core\2.10.3\xmlunit-core-2.10.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\security\spring-security-test\6.5.2\spring-security-test-6.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\security\spring-security-core\6.5.2\spring-security-core-6.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\security\spring-security-crypto\6.5.2\spring-security-crypto-6.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\h2database\h2\2.3.232\h2-2.3.232.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-mail\3.5.4\spring-boot-starter-mail-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-context-support\6.2.9\spring-context-support-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\eclipse\angus\jakarta.mail\2.0.3\jakarta.mail-2.0.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\eclipse\angus\angus-activation\2.0.2\angus-activation-2.0.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\api-client\google-api-client\2.7.2\google-api-client-2.7.2.jar;C:\Users\K.Durga Prasad\.m2\repository\commons-codec\commons-codec\1.18.0\commons-codec-1.18.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\auth\google-auth-library-credentials\1.30.0\google-auth-library-credentials-1.30.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\auth\google-auth-library-oauth2-http\1.30.0\google-auth-library-oauth2-http-1.30.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\auto\value\auto-value-annotations\1.11.0\auto-value-annotations-1.11.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\errorprone\error_prone_annotations\2.35.1\error_prone_annotations-2.35.1.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\http-client\google-http-client-gson\1.45.2\google-http-client-gson-1.45.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\code\gson\gson\2.13.1\gson-2.13.1.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\guava\guava\33.1.0-jre\guava-33.1.0-jre.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\guava\failureaccess\1.0.2\failureaccess-1.0.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\j2objc\j2objc-annotations\3.0.0\j2objc-annotations-3.0.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\http-client\google-http-client-apache-v2\1.45.2\google-http-client-apache-v2-1.45.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\httpcomponents\httpcore\4.4.16\httpcore-4.4.16.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\httpcomponents\httpclient\4.5.14\httpclient-4.5.14.jar;C:\Users\K.Durga Prasad\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\http-client\google-http-client\1.45.2\google-http-client-1.45.2.jar;C:\Users\K.Durga Prasad\.m2\repository\io\grpc\grpc-context\1.68.2\grpc-context-1.68.2.jar;C:\Users\K.Durga Prasad\.m2\repository\io\grpc\grpc-api\1.68.2\grpc-api-1.68.2.jar;C:\Users\K.Durga Prasad\.m2\repository\io\opencensus\opencensus-api\0.31.1\opencensus-api-0.31.1.jar;C:\Users\K.Durga Prasad\.m2\repository\io\opencensus\opencensus-contrib-http-util\0.31.1\opencensus-contrib-http-util-0.31.1.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\oauth-client\google-oauth-client\1.37.0\google-oauth-client-1.37.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\http-client\google-http-client-jackson2\1.46.3\google-http-client-jackson2-1.46.3.jar;C:\Users\K.Durga Prasad\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.19.2\jackson-core-2.19.2.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Calcutta"/>
+    <property name="org.jboss.logging.provider" value="slf4j"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="25"/>
+    <property name="APPLICATION_NAME" value="due-diligence-agent-test"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-25\bin"/>
+    <property name="sun.java.command" value="C:\Users\K.Durga Prasad\AppData\Local\Temp\surefire734617884234084518\surefirebooter-20260818161205340_3.jar C:\Users\K.Durga Prasad\AppData\Local\Temp\surefire734617884234084518 2026-08-18T16-12-05_130-jvmRun1 surefire-20260818161205340_1tmp surefire_0-20260818161205340_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\K.Durga Prasad\Desktop\internship\team-02\backend\target\test-classes;C:\Users\K.Durga Prasad\Desktop\internship\team-02\backend\target\classes;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.5.4\spring-boot-starter-web-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter\3.5.4\spring-boot-starter-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.5.4\spring-boot-starter-logging-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\ch\qos\logback\logback-classic\1.5.18\logback-classic-1.5.18.jar;C:\Users\K.Durga Prasad\.m2\repository\ch\qos\logback\logback-core\1.5.18\logback-core-1.5.18.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.24.3\log4j-to-slf4j-2.24.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\slf4j\jul-to-slf4j\2.0.17\jul-to-slf4j-2.0.17.jar;C:\Users\K.Durga Prasad\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\K.Durga Prasad\.m2\repository\org\yaml\snakeyaml\2.4\snakeyaml-2.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.5.4\spring-boot-starter-json-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.19.2\jackson-datatype-jdk8-2.19.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.19.2\jackson-datatype-jsr310-2.19.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.19.2\jackson-module-parameter-names-2.19.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.5.4\spring-boot-starter-tomcat-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.43\tomcat-embed-core-10.1.43.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.43\tomcat-embed-websocket-10.1.43.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-web\6.2.9\spring-web-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-beans\6.2.9\spring-beans-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\io\micrometer\micrometer-observation\1.15.2\micrometer-observation-1.15.2.jar;C:\Users\K.Durga Prasad\.m2\repository\io\micrometer\micrometer-commons\1.15.2\micrometer-commons-1.15.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-webmvc\6.2.9\spring-webmvc-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-context\6.2.9\spring-context-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-expression\6.2.9\spring-expression-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.5.4\spring-boot-starter-data-jpa-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.5.4\spring-boot-starter-jdbc-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\com\zaxxer\HikariCP\6.3.1\HikariCP-6.3.1.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-jdbc\6.2.9\spring-jdbc-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\hibernate\orm\hibernate-core\6.6.22.Final\hibernate-core-6.6.22.Final.jar;C:\Users\K.Durga Prasad\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\K.Durga Prasad\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\K.Durga Prasad\.m2\repository\org\jboss\logging\jboss-logging\3.6.1.Final\jboss-logging-3.6.1.Final.jar;C:\Users\K.Durga Prasad\.m2\repository\org\hibernate\common\hibernate-commons-annotations\7.0.3.Final\hibernate-commons-annotations-7.0.3.Final.jar;C:\Users\K.Durga Prasad\.m2\repository\io\smallrye\jandex\3.2.0\jandex-3.2.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\fasterxml\classmate\1.7.0\classmate-1.7.0.jar;C:\Users\K.Durga Prasad\.m2\repository\net\bytebuddy\byte-buddy\1.17.6\byte-buddy-1.17.6.jar;C:\Users\K.Durga Prasad\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.5\jaxb-runtime-4.0.5.jar;C:\Users\K.Durga Prasad\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.5\jaxb-core-4.0.5.jar;C:\Users\K.Durga Prasad\.m2\repository\org\glassfish\jaxb\txw2\4.0.5\txw2-4.0.5.jar;C:\Users\K.Durga Prasad\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\K.Durga Prasad\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\K.Durga Prasad\.m2\repository\org\antlr\antlr4-runtime\4.13.0\antlr4-runtime-4.13.0.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\data\spring-data-jpa\3.5.2\spring-data-jpa-3.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\data\spring-data-commons\3.5.2\spring-data-commons-3.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-orm\6.2.9\spring-orm-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-tx\6.2.9\spring-tx-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\slf4j\slf4j-api\2.0.17\slf4j-api-2.0.17.jar;C:\Users\K.Durga Prasad\.m2\repository\com\github\librepdf\openpdf\1.3.39\openpdf-1.3.39.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\poi\poi-ooxml\5.2.5\poi-ooxml-5.2.5.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\poi\poi\5.2.5\poi-5.2.5.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\K.Durga Prasad\.m2\repository\com\zaxxer\SparseBitSet\1.3\SparseBitSet-1.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\poi\poi-ooxml-lite\5.2.5\poi-ooxml-lite-5.2.5.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\xmlbeans\xmlbeans\5.2.0\xmlbeans-5.2.0.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\commons\commons-compress\1.25.0\commons-compress-1.25.0.jar;C:\Users\K.Durga Prasad\.m2\repository\commons-io\commons-io\2.15.0\commons-io-2.15.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\github\virtuald\curvesapi\1.08\curvesapi-1.08.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\retry\spring-retry\2.0.12\spring-retry-2.0.12.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-aspects\6.2.9\spring-aspects-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\aspectj\aspectjweaver\1.9.24\aspectjweaver-1.9.24.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-security\3.5.4\spring-boot-starter-security-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-aop\6.2.9\spring-aop-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\security\spring-security-config\6.5.2\spring-security-config-6.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\security\spring-security-web\6.5.2\spring-security-web-6.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.5.4\spring-boot-starter-validation-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.43\tomcat-embed-el-10.1.43.jar;C:\Users\K.Durga Prasad\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.2.Final\hibernate-validator-8.0.2.Final.jar;C:\Users\K.Durga Prasad\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\postgresql\postgresql\42.7.7\postgresql-42.7.7.jar;C:\Users\K.Durga Prasad\.m2\repository\org\checkerframework\checker-qual\3.49.3\checker-qual-3.49.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\projectlombok\lombok\1.18.38\lombok-1.18.38.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-devtools\3.5.4\spring-boot-devtools-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot\3.5.4\spring-boot-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.5.4\spring-boot-autoconfigure-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\io\jsonwebtoken\jjwt-api\0.12.6\jjwt-api-0.12.6.jar;C:\Users\K.Durga Prasad\.m2\repository\io\jsonwebtoken\jjwt-impl\0.12.6\jjwt-impl-0.12.6.jar;C:\Users\K.Durga Prasad\.m2\repository\io\jsonwebtoken\jjwt-jackson\0.12.6\jjwt-jackson-0.12.6.jar;C:\Users\K.Durga Prasad\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.19.2\jackson-databind-2.19.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.19.2\jackson-annotations-2.19.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.5.4\spring-boot-starter-test-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-test\3.5.4\spring-boot-test-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.5.4\spring-boot-test-autoconfigure-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\K.Durga Prasad\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\K.Durga Prasad\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\K.Durga Prasad\.m2\repository\net\minidev\json-smart\2.5.2\json-smart-2.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\net\minidev\accessors-smart\2.5.2\accessors-smart-2.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\ow2\asm\asm\9.7.1\asm-9.7.1.jar;C:\Users\K.Durga Prasad\.m2\repository\org\assertj\assertj-core\3.27.3\assertj-core-3.27.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\awaitility\awaitility\4.2.2\awaitility-4.2.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\hamcrest\hamcrest\3.0\hamcrest-3.0.jar;C:\Users\K.Durga Prasad\.m2\repository\org\junit\jupiter\junit-jupiter\5.12.2\junit-jupiter-5.12.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.12.2\junit-jupiter-api-5.12.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\K.Durga Prasad\.m2\repository\org\junit\platform\junit-platform-commons\1.12.2\junit-platform-commons-1.12.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.12.2\junit-jupiter-params-5.12.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.12.2\junit-jupiter-engine-5.12.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\junit\platform\junit-platform-engine\1.12.2\junit-platform-engine-1.12.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\mockito\mockito-core\5.17.0\mockito-core-5.17.0.jar;C:\Users\K.Durga Prasad\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.6\byte-buddy-agent-1.17.6.jar;C:\Users\K.Durga Prasad\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\mockito\mockito-junit-jupiter\5.17.0\mockito-junit-jupiter-5.17.0.jar;C:\Users\K.Durga Prasad\.m2\repository\org\skyscreamer\jsonassert\1.5.3\jsonassert-1.5.3.jar;C:\Users\K.Durga Prasad\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-core\6.2.9\spring-core-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-jcl\6.2.9\spring-jcl-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-test\6.2.9\spring-test-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\xmlunit\xmlunit-core\2.10.3\xmlunit-core-2.10.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\security\spring-security-test\6.5.2\spring-security-test-6.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\security\spring-security-core\6.5.2\spring-security-core-6.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\security\spring-security-crypto\6.5.2\spring-security-crypto-6.5.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\h2database\h2\2.3.232\h2-2.3.232.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\boot\spring-boot-starter-mail\3.5.4\spring-boot-starter-mail-3.5.4.jar;C:\Users\K.Durga Prasad\.m2\repository\org\springframework\spring-context-support\6.2.9\spring-context-support-6.2.9.jar;C:\Users\K.Durga Prasad\.m2\repository\org\eclipse\angus\jakarta.mail\2.0.3\jakarta.mail-2.0.3.jar;C:\Users\K.Durga Prasad\.m2\repository\org\eclipse\angus\angus-activation\2.0.2\angus-activation-2.0.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\api-client\google-api-client\2.7.2\google-api-client-2.7.2.jar;C:\Users\K.Durga Prasad\.m2\repository\commons-codec\commons-codec\1.18.0\commons-codec-1.18.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\auth\google-auth-library-credentials\1.30.0\google-auth-library-credentials-1.30.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\auth\google-auth-library-oauth2-http\1.30.0\google-auth-library-oauth2-http-1.30.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\auto\value\auto-value-annotations\1.11.0\auto-value-annotations-1.11.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\errorprone\error_prone_annotations\2.35.1\error_prone_annotations-2.35.1.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\http-client\google-http-client-gson\1.45.2\google-http-client-gson-1.45.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\code\gson\gson\2.13.1\gson-2.13.1.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\guava\guava\33.1.0-jre\guava-33.1.0-jre.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\guava\failureaccess\1.0.2\failureaccess-1.0.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\j2objc\j2objc-annotations\3.0.0\j2objc-annotations-3.0.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\http-client\google-http-client-apache-v2\1.45.2\google-http-client-apache-v2-1.45.2.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\httpcomponents\httpcore\4.4.16\httpcore-4.4.16.jar;C:\Users\K.Durga Prasad\.m2\repository\org\apache\httpcomponents\httpclient\4.5.14\httpclient-4.5.14.jar;C:\Users\K.Durga Prasad\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\http-client\google-http-client\1.45.2\google-http-client-1.45.2.jar;C:\Users\K.Durga Prasad\.m2\repository\io\grpc\grpc-context\1.68.2\grpc-context-1.68.2.jar;C:\Users\K.Durga Prasad\.m2\repository\io\grpc\grpc-api\1.68.2\grpc-api-1.68.2.jar;C:\Users\K.Durga Prasad\.m2\repository\io\opencensus\opencensus-api\0.31.1\opencensus-api-0.31.1.jar;C:\Users\K.Durga Prasad\.m2\repository\io\opencensus\opencensus-contrib-http-util\0.31.1\opencensus-contrib-http-util-0.31.1.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\oauth-client\google-oauth-client\1.37.0\google-oauth-client-1.37.0.jar;C:\Users\K.Durga Prasad\.m2\repository\com\google\http-client\google-http-client-jackson2\1.46.3\google-http-client-jackson2-1.46.3.jar;C:\Users\K.Durga Prasad\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.19.2\jackson-core-2.19.2.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\K.Durga Prasad"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-10-21"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-25"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\K.Durga Prasad\Desktop\internship\team-02\backend"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="surefire.real.class.path" value="C:\Users\K.Durga Prasad\AppData\Local\Temp\surefire734617884234084518\surefirebooter-20260818161205340_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="25.0.1+8-LTS-27"/>
+    <property name="user.name" value="K.Durga Prasad"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\K.Durga Prasad\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\K327C~1.DUR\AppData\Local\Temp\"/>
+    <property name="com.zaxxer.hikari.pool_number" value="2"/>
+    <property name="java.version" value="25.0.1"/>
+    <property name="user.dir" value="C:\Users\K.Durga Prasad\Desktop\internship\team-02\backend"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="3824"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-25\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;c:\Users\K.Durga Prasad\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\K.Durga Prasad\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Java\jdk-25\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;E:\apache\apache-maven-3.9.16\bin;C:\Program Files\Java\jdk-25\bin;C:\Users\K.Durga Prasad\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\K.Durga Prasad\AppData\Local\Programs\Python\Python313\;C:\Users\K.Durga Prasad\AppData\Local\Programs\Python\Launcher\;C:\Users\K.Durga Prasad\AppData\Local\Microsoft\WindowsApps;C:\Users\K.Durga Prasad\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.17.10-hotspot\bin;C:\Users\K.Durga Prasad\AppData\Roaming\npm;c:\Users\K.Durga Prasad\.vscode\extensions\vscjava.vscode-java-debug-0.59.0\bundled\scripts\noConfigScripts;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="25.0.1+8-LTS-27"/>
+    <property name="stdin.encoding" value="Cp1252"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="69.0"/>
+    <property name="LOGGED_APPLICATION_NAME" value="[due-diligence-agent-test] "/>
+  </properties>
+  <testcase name="getPropertiesByCity_filtersCorrectly_usingDbQuery" classname="com.realestate.due_diligence_agent.controller.PropertyControllerIntegrationTest" time="0.705">
+    <system-out><![CDATA[2026-08-18T16:12:25.250+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.realestate.due_diligence_agent.controller.PropertyControllerIntegrationTest]: PropertyControllerIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-08-18T16:12:25.267+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.realestate.due_diligence_agent.DueDiligenceAgentApplication for test class com.realestate.due_diligence_agent.controller.PropertyControllerIntegrationTest
+2026-08-18T16:12:25.305+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.4)
+
+2026-08-18T16:12:25.376+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] .r.d.c.PropertyControllerIntegrationTest : Starting PropertyControllerIntegrationTest using Java 25.0.1 with PID 3824 (started by K.Durga Prasad in C:\Users\K.Durga Prasad\Desktop\internship\team-02\backend)
+2026-08-18T16:12:25.376+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] .r.d.c.PropertyControllerIntegrationTest : The following 1 profile is active: "test"
+2026-08-18T16:12:26.021+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-18T16:12:26.140+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 114 ms. Found 15 JPA repository interfaces.
+2026-08-18T16:12:26.761+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-18T16:12:26.774+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-08-18T16:12:26.816+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-18T16:12:26.820+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-08-18T16:12:26.822+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:testdb user=SA
+2026-08-18T16:12:26.822+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-08-18T16:12:26.823+05:30  WARN 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-18T16:12:26.824+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-08-18T16:12:27.195+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-18T16:12:27.273+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-18T16:12:27.913+05:30  WARN 3824 --- [due-diligence-agent-test] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-18T16:12:27.939+05:30  WARN 3824 --- [due-diligence-agent-test] [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 9c3fb8b6-cf48-4db3-a288-550c3987c4db
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-08-18T16:12:27.942+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-08-18T16:12:27.976+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.AddressController:
+	{GET [/api/address/validate]}: validate(String)
+2026-08-18T16:12:27.981+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.AdminController:
+	{GET [/api/admin/system-health]}: systemHealth()
+	{PUT [/api/admin/users/{id}/role]}: updateUserRole(Long,UpdateUserRoleRequest)
+	{GET [/api/admin/dashboard/stats]}: dashboardStats()
+	{DELETE [/api/admin/users/{id}]}: deleteUser(Long)
+	{GET [/api/admin/users]}: listUsers()
+2026-08-18T16:12:27.984+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.AgentController:
+	{GET [/api/agent/dashboard]}: dashboard()
+2026-08-18T16:12:27.986+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.AuditLogController:
+	{GET [/api/audit-logs/search || /api/audit-logs]}: list(String,String,String,String,String,String,LocalDate,LocalDate,int,int)
+	{GET [/api/audit-logs/{id}]}: getById(Long)
+	{GET [/api/audit-logs/stats]}: stats()
+2026-08-18T16:12:27.992+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.AuthController:
+	{POST [/api/auth/login]}: login(LoginRequest)
+	{POST [/api/auth/reset-password]}: resetPassword(ResetPasswordRequest)
+	{POST [/api/auth/register]}: registerUser(RegisterRequest)
+	{POST [/api/auth/forgot-password]}: forgotPassword(ForgotPasswordRequest)
+	{POST [/api/auth/verify-otp]}: verifyOtp(VerifyOtpRequest)
+2026-08-18T16:12:27.995+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.BuyerController:
+	{GET [/api/buyer/dashboard]}: dashboard()
+2026-08-18T16:12:27.996+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.ComparablePropertyController:
+	{GET [/api/comparable/{propertyId}]}: getComparableProperties(Long)
+2026-08-18T16:12:27.998+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.DueDiligenceReportController:
+	{GET [/api/reports/{propertyId}/history]}: getReportHistory(Long)
+	{GET [/api/reports/{propertyId}]}: generateReport(Long)
+	{GET [/api/reports/{propertyId}/summary]}: getSummary(Long)
+2026-08-18T16:12:28.000+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.ExportController:
+	{GET [/api/export/excel/{propertyId}]}: exportExcel(Long)
+	{GET [/api/export/pdf/{propertyId}]}: exportPdf(Long)
+2026-08-18T16:12:28.006+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.PropertyController:
+	{GET [/api/properties/{id}/flood-zone]}: getFloodZone(Long)
+	{POST [/api/properties]}: addProperty(PropertyRequest)
+	{DELETE [/api/properties/{id}]}: deleteProperty(Long)
+	{PUT [/api/properties/{id}]}: updateProperty(Long,PropertyRequest)
+	{POST [/api/properties/{id}/verify]}: verifyProperty(Long)
+	{GET [/api/properties/{id}]}: getPropertyById(Long)
+	{GET [/api/properties]}: getAllProperties()
+	{GET [/api/properties/stats]}: getStats()
+	{GET [/api/properties/city/{city}]}: getByCity(String)
+	{GET [/api/properties/price]}: getByPrice(Double,Double)
+	{GET [/api/properties/type/{type}]}: getByType(String)
+2026-08-18T16:12:28.011+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.PropertyTaxHistoryController:
+	{GET [/api/tax-history/property/{propertyId}]}: getTaxHistory(Long)
+	{DELETE [/api/tax-history/{id}]}: deleteTaxHistory(Long)
+	{PUT [/api/tax-history/{id}]}: updateTaxHistory(Long,PropertyTaxHistory)
+	{POST [/api/tax-history/property/{propertyId}]}: addTaxHistory(Long,PropertyTaxHistory)
+2026-08-18T16:12:28.015+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.ReportHistoryController:
+	{GET [/api/report-history/search || /api/report-history]}: list(String,String,String,String,String,LocalDate,LocalDate,int,int)
+	{GET [/api/report-history/{id}]}: getById(Long)
+	{GET [/api/report-history/{id}/excel]}: downloadExcel(Long)
+	{GET [/api/report-history/{id}/pdf]}: downloadPdf(Long)
+	{GET [/api/report-history/stats]}: stats()
+2026-08-18T16:12:28.023+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.RiskAssessmentController:
+	{GET [/api/risk/{propertyId}]}: getRiskAssessment(Long)
+	{POST [/api/risk/{propertyId}]}: generateRiskAssessment(Long)
+2026-08-18T16:12:28.030+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.UserController:
+	{POST [/api/users/logout]}: logout()
+	{GET [/api/users/profile]}: getProfile()
+	{PUT [/api/users/profile]}: updateProfile(UpdateProfileRequest)
+	{PUT [/api/users/change-password]}: changePassword(ChangePasswordRequest)
+	{POST [/api/users/profile/photo]}: uploadProfilePhoto(MultipartFile)
+	{DELETE [/api/users/profile/photo]}: removeProfilePhoto()
+2026-08-18T16:12:28.035+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.c.ValuationController:
+	{GET [/api/valuation/{propertyId}]}: compareValuation(Long)
+2026-08-18T16:12:28.039+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.r.d.n.NotificationController:
+	{GET [/api/notifications/unread]}: getUnreadNotifications(Long)
+	{GET [/api/notifications]}: getNotifications(Long)
+	{GET [/api/notifications/unread/count]}: getUnreadCount(Long)
+	{PUT [/api/notifications/read-all]}: markAllAsRead(Long)
+	{PUT [/api/notifications/{id}/read]}: markAsRead(Long)
+2026-08-18T16:12:28.049+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2026-08-18T16:12:28.063+05:30 DEBUG 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 58 mappings in 'requestMappingHandlerMapping'
+2026-08-18T16:12:28.306+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-08-18T16:12:28.306+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-08-18T16:12:28.308+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2026-08-18T16:12:28.327+05:30  INFO 3824 --- [due-diligence-agent-test] [           main] .r.d.c.PropertyControllerIntegrationTest : Started PropertyControllerIntegrationTest in 3.023 seconds (process running for 22.708)
+2026-08-18T16:12:28.426+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#registerUser(RegisterRequest)
+2026-08-18T16:12:28.460+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34141396756700.0@example.com]
+2026-08-18T16:12:28.564+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34141396756700.0@example.com]
+2026-08-18T16:12:28.565+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:28.565+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [$2a$10$ADFe0s9nep9hU/4UL1ZGj.8KQShdvf4vWEyVZo.mOGRaLRzvXFev2]
+2026-08-18T16:12:28.565+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [null]
+2026-08-18T16:12:28.565+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:ENUM) <- [BUYER]
+2026-08-18T16:12:28.578+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#login(LoginRequest)
+2026-08-18T16:12:28.584+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34141396756700.0@example.com]
+2026-08-18T16:12:28.679+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [LOGIN]
+2026-08-18T16:12:28.679+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:28.677163900]
+2026-08-18T16:12:28.680+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [User logged in.]
+2026-08-18T16:12:28.680+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [1]
+2026-08-18T16:12:28.680+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [USER]
+2026-08-18T16:12:28.680+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:28.680+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Auth]
+2026-08-18T16:12:28.680+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [null]
+2026-08-18T16:12:28.680+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:28.680+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:28.681+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [1]
+2026-08-18T16:12:28.681+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:28.796+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34141396756700.0@example.com]
+2026-08-18T16:12:28.800+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#addProperty(PropertyRequest)
+2026-08-18T16:12:28.856+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [221B Baker Street]
+2026-08-18T16:12:28.856+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:DOUBLE) <- [1200.0]
+2026-08-18T16:12:28.857+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [London]
+2026-08-18T16:12:28.857+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [John Doe]
+2026-08-18T16:12:28.857+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:DOUBLE) <- [500000.0]
+2026-08-18T16:12:28.857+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [Residential]
+2026-08-18T16:12:28.857+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:DATE) <- [2026-08-18]
+2026-08-18T16:12:28.857+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:VARCHAR) <- [Greater London]
+2026-08-18T16:12:28.858+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [London Flat]
+2026-08-18T16:12:28.858+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:BIGINT) <- [1]
+2026-08-18T16:12:28.858+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:DATE) <- [null]
+2026-08-18T16:12:28.859+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:DOUBLE) <- [0.0]
+2026-08-18T16:12:28.859+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (13:VARCHAR) <- [Pending]
+2026-08-18T16:12:28.861+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [CREATE_PROPERTY]
+2026-08-18T16:12:28.862+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:28.860204400]
+2026-08-18T16:12:28.862+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [Created property "London Flat".]
+2026-08-18T16:12:28.862+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [1]
+2026-08-18T16:12:28.862+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [PROPERTY]
+2026-08-18T16:12:28.862+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:28.863+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Property]
+2026-08-18T16:12:28.863+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [1]
+2026-08-18T16:12:28.863+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:28.863+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:28.863+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [1]
+2026-08-18T16:12:28.863+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:28.916+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34141396756700.0@example.com]
+2026-08-18T16:12:28.918+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#addProperty(PropertyRequest)
+2026-08-18T16:12:28.920+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [1 Rue de Rivoli]
+2026-08-18T16:12:28.921+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:DOUBLE) <- [900.0]
+2026-08-18T16:12:28.921+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [Paris]
+2026-08-18T16:12:28.921+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [Marie Curie]
+2026-08-18T16:12:28.922+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:DOUBLE) <- [700000.0]
+2026-08-18T16:12:28.926+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [Residential]
+2026-08-18T16:12:28.928+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:DATE) <- [2026-08-18]
+2026-08-18T16:12:28.928+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:VARCHAR) <- [Ile-de-France]
+2026-08-18T16:12:28.928+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [Paris Apartment]
+2026-08-18T16:12:28.928+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:BIGINT) <- [1]
+2026-08-18T16:12:28.928+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:DATE) <- [null]
+2026-08-18T16:12:28.928+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:DOUBLE) <- [0.0]
+2026-08-18T16:12:28.928+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (13:VARCHAR) <- [Pending]
+2026-08-18T16:12:28.931+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [CREATE_PROPERTY]
+2026-08-18T16:12:28.931+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:28.930210400]
+2026-08-18T16:12:28.931+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [Created property "Paris Apartment".]
+2026-08-18T16:12:28.931+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [2]
+2026-08-18T16:12:28.931+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [PROPERTY]
+2026-08-18T16:12:28.931+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:28.931+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Property]
+2026-08-18T16:12:28.931+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [2]
+2026-08-18T16:12:28.931+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:28.932+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:28.932+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [1]
+2026-08-18T16:12:28.932+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:28.943+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34141396756700.0@example.com]
+2026-08-18T16:12:28.944+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#getByCity(String)
+2026-08-18T16:12:28.961+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [London]
+2026-08-18T16:12:29.024+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34141396756700.0@example.com]
+2026-08-18T16:12:29.026+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#getByCity(String)
+2026-08-18T16:12:29.032+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [london]
+]]></system-out>
+  </testcase>
+  <testcase name="addProperty_withoutRequiredFields_returns400" classname="com.realestate.due_diligence_agent.controller.PropertyControllerIntegrationTest" time="0.257">
+    <system-out><![CDATA[2026-08-18T16:12:29.069+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#registerUser(RegisterRequest)
+2026-08-18T16:12:29.078+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142040726100.1@example.com]
+2026-08-18T16:12:29.176+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142040726100.1@example.com]
+2026-08-18T16:12:29.176+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:29.176+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [$2a$10$n6dIUQdXdF8h/xsV0rL48eebXfnwQVlz9BYm4U7jETec/5Fdv7l96]
+2026-08-18T16:12:29.176+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [null]
+2026-08-18T16:12:29.177+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:ENUM) <- [BUYER]
+2026-08-18T16:12:29.180+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#login(LoginRequest)
+2026-08-18T16:12:29.183+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142040726100.1@example.com]
+2026-08-18T16:12:29.280+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [LOGIN]
+2026-08-18T16:12:29.281+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:29.278232400]
+2026-08-18T16:12:29.281+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [User logged in.]
+2026-08-18T16:12:29.281+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [2]
+2026-08-18T16:12:29.282+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [USER]
+2026-08-18T16:12:29.282+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:29.282+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Auth]
+2026-08-18T16:12:29.282+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [null]
+2026-08-18T16:12:29.282+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:29.282+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:29.282+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [2]
+2026-08-18T16:12:29.282+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:29.289+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142040726100.1@example.com]
+2026-08-18T16:12:29.290+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#addProperty(PropertyRequest)
+]]></system-out>
+  </testcase>
+  <testcase name="addProperty_thenGetById_returnsPersistedProperty" classname="com.realestate.due_diligence_agent.controller.PropertyControllerIntegrationTest" time="0.319">
+    <system-out><![CDATA[2026-08-18T16:12:29.335+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#registerUser(RegisterRequest)
+2026-08-18T16:12:29.344+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142306715400.2@example.com]
+2026-08-18T16:12:29.446+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142306715400.2@example.com]
+2026-08-18T16:12:29.446+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:29.446+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [$2a$10$mr2eeuYRRzgQoYnWt/BNxeRQBWXIj4E6vPyxPysDXdso/LObu2e5.]
+2026-08-18T16:12:29.446+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [null]
+2026-08-18T16:12:29.446+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:ENUM) <- [BUYER]
+2026-08-18T16:12:29.449+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#login(LoginRequest)
+2026-08-18T16:12:29.452+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142306715400.2@example.com]
+2026-08-18T16:12:29.548+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [LOGIN]
+2026-08-18T16:12:29.548+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:29.546273300]
+2026-08-18T16:12:29.549+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [User logged in.]
+2026-08-18T16:12:29.549+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [3]
+2026-08-18T16:12:29.549+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [USER]
+2026-08-18T16:12:29.549+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:29.549+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Auth]
+2026-08-18T16:12:29.549+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [null]
+2026-08-18T16:12:29.549+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:29.549+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:29.549+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [3]
+2026-08-18T16:12:29.549+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:29.556+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142306715400.2@example.com]
+2026-08-18T16:12:29.557+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#addProperty(PropertyRequest)
+2026-08-18T16:12:29.561+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [221B Baker Street]
+2026-08-18T16:12:29.561+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:DOUBLE) <- [1200.0]
+2026-08-18T16:12:29.561+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [London]
+2026-08-18T16:12:29.561+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [John Doe]
+2026-08-18T16:12:29.561+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:DOUBLE) <- [500000.0]
+2026-08-18T16:12:29.561+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [Residential]
+2026-08-18T16:12:29.561+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:DATE) <- [2026-08-18]
+2026-08-18T16:12:29.561+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:VARCHAR) <- [Greater London]
+2026-08-18T16:12:29.561+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [Baker Street Flat]
+2026-08-18T16:12:29.561+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:BIGINT) <- [3]
+2026-08-18T16:12:29.561+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:DATE) <- [null]
+2026-08-18T16:12:29.561+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:DOUBLE) <- [0.0]
+2026-08-18T16:12:29.561+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (13:VARCHAR) <- [Pending]
+2026-08-18T16:12:29.563+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [CREATE_PROPERTY]
+2026-08-18T16:12:29.564+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:29.562277300]
+2026-08-18T16:12:29.564+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [Created property "Baker Street Flat".]
+2026-08-18T16:12:29.564+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [3]
+2026-08-18T16:12:29.564+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [PROPERTY]
+2026-08-18T16:12:29.564+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:29.564+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Property]
+2026-08-18T16:12:29.564+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [3]
+2026-08-18T16:12:29.564+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:29.564+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:29.564+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [3]
+2026-08-18T16:12:29.564+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:29.574+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142306715400.2@example.com]
+2026-08-18T16:12:29.576+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#getPropertyById(Long)
+2026-08-18T16:12:29.627+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [VIEW_PROPERTY]
+2026-08-18T16:12:29.627+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:29.626281800]
+2026-08-18T16:12:29.627+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [Viewed property ID 3.]
+2026-08-18T16:12:29.627+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [3]
+2026-08-18T16:12:29.628+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [PROPERTY]
+2026-08-18T16:12:29.628+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:29.628+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Property]
+2026-08-18T16:12:29.628+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [3]
+2026-08-18T16:12:29.628+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:29.628+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:29.628+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [3]
+2026-08-18T16:12:29.628+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+]]></system-out>
+  </testcase>
+  <testcase name="buyerAccessingAdminEndpoint_isRejectedWith403" classname="com.realestate.due_diligence_agent.controller.PropertyControllerIntegrationTest" time="0.261">
+    <system-out><![CDATA[2026-08-18T16:12:29.647+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#registerUser(RegisterRequest)
+2026-08-18T16:12:29.651+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142619113600.3@example.com]
+2026-08-18T16:12:29.764+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142619113600.3@example.com]
+2026-08-18T16:12:29.764+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:29.764+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [$2a$10$3VY5ye8WFoWxnRo7ZMDvZOXZIgoI57f1Qn86wXY9rjlmF4C5d4Lxu]
+2026-08-18T16:12:29.764+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [null]
+2026-08-18T16:12:29.764+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:ENUM) <- [BUYER]
+2026-08-18T16:12:29.768+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#login(LoginRequest)
+2026-08-18T16:12:29.771+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142619113600.3@example.com]
+2026-08-18T16:12:29.873+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [LOGIN]
+2026-08-18T16:12:29.873+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:29.872298500]
+2026-08-18T16:12:29.874+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [User logged in.]
+2026-08-18T16:12:29.874+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [4]
+2026-08-18T16:12:29.874+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [USER]
+2026-08-18T16:12:29.874+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:29.874+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Auth]
+2026-08-18T16:12:29.874+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [null]
+2026-08-18T16:12:29.874+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:29.874+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:29.874+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [4]
+2026-08-18T16:12:29.874+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:29.881+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142619113600.3@example.com]
+]]></system-out>
+  </testcase>
+  <testcase name="onlyOwner_canUpdateOrDeleteAProperty" classname="com.realestate.due_diligence_agent.controller.PropertyControllerIntegrationTest" time="0.552">
+    <system-out><![CDATA[2026-08-18T16:12:29.923+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#registerUser(RegisterRequest)
+2026-08-18T16:12:29.926+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142891333300.4@example.com]
+2026-08-18T16:12:30.029+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142891333300.4@example.com]
+2026-08-18T16:12:30.029+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:30.029+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [$2a$10$3o/GFetlv8s6FNbH9u0Asex21stz6pe1kE4FON7zbE3raIkqnKPjG]
+2026-08-18T16:12:30.029+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [null]
+2026-08-18T16:12:30.029+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:ENUM) <- [BUYER]
+2026-08-18T16:12:30.032+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#login(LoginRequest)
+2026-08-18T16:12:30.035+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142891333300.4@example.com]
+2026-08-18T16:12:30.118+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [LOGIN]
+2026-08-18T16:12:30.118+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:30.117314500]
+2026-08-18T16:12:30.118+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [User logged in.]
+2026-08-18T16:12:30.118+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [5]
+2026-08-18T16:12:30.118+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [USER]
+2026-08-18T16:12:30.118+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:30.118+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Auth]
+2026-08-18T16:12:30.119+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [null]
+2026-08-18T16:12:30.119+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:30.119+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:30.119+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [5]
+2026-08-18T16:12:30.119+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:30.127+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#registerUser(RegisterRequest)
+2026-08-18T16:12:30.130+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34143099028700.5@example.com]
+2026-08-18T16:12:30.253+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34143099028700.5@example.com]
+2026-08-18T16:12:30.253+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:30.253+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [$2a$10$wMNWTEyb.U7JhF6oDRkyp.RdwcqkwGzAkWo3shCk5MwWjA9bYY7Vq]
+2026-08-18T16:12:30.253+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [null]
+2026-08-18T16:12:30.254+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:ENUM) <- [BUYER]
+2026-08-18T16:12:30.264+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#login(LoginRequest)
+2026-08-18T16:12:30.266+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34143099028700.5@example.com]
+2026-08-18T16:12:30.363+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [LOGIN]
+2026-08-18T16:12:30.364+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:30.362329600]
+2026-08-18T16:12:30.364+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [User logged in.]
+2026-08-18T16:12:30.364+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [6]
+2026-08-18T16:12:30.364+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [USER]
+2026-08-18T16:12:30.364+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:30.364+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Auth]
+2026-08-18T16:12:30.364+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [null]
+2026-08-18T16:12:30.364+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:30.364+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:30.364+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [6]
+2026-08-18T16:12:30.364+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:30.370+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142891333300.4@example.com]
+2026-08-18T16:12:30.372+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#addProperty(PropertyRequest)
+2026-08-18T16:12:30.375+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [221B Baker Street]
+2026-08-18T16:12:30.375+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:DOUBLE) <- [1200.0]
+2026-08-18T16:12:30.375+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [London]
+2026-08-18T16:12:30.375+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [John Doe]
+2026-08-18T16:12:30.375+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:DOUBLE) <- [500000.0]
+2026-08-18T16:12:30.375+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [Residential]
+2026-08-18T16:12:30.375+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:DATE) <- [2026-08-18]
+2026-08-18T16:12:30.376+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:VARCHAR) <- [Greater London]
+2026-08-18T16:12:30.376+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [Owner-Only Edit Test]
+2026-08-18T16:12:30.376+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:BIGINT) <- [5]
+2026-08-18T16:12:30.376+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:DATE) <- [null]
+2026-08-18T16:12:30.376+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:DOUBLE) <- [0.0]
+2026-08-18T16:12:30.376+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (13:VARCHAR) <- [Pending]
+2026-08-18T16:12:30.378+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [CREATE_PROPERTY]
+2026-08-18T16:12:30.378+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:30.377334200]
+2026-08-18T16:12:30.378+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [Created property "Owner-Only Edit Test".]
+2026-08-18T16:12:30.378+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [4]
+2026-08-18T16:12:30.378+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [PROPERTY]
+2026-08-18T16:12:30.378+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:30.378+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Property]
+2026-08-18T16:12:30.379+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [4]
+2026-08-18T16:12:30.379+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:30.379+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:30.379+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [5]
+2026-08-18T16:12:30.379+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:30.386+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34143099028700.5@example.com]
+2026-08-18T16:12:30.387+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#updateProperty(Long, PropertyRequest)
+2026-08-18T16:12:30.403+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [4]
+2026-08-18T16:12:30.403+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:BIGINT) <- [6]
+2026-08-18T16:12:30.412+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34143099028700.5@example.com]
+2026-08-18T16:12:30.413+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#deleteProperty(Long)
+2026-08-18T16:12:30.421+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34142891333300.4@example.com]
+2026-08-18T16:12:30.423+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#updateProperty(Long, PropertyRequest)
+2026-08-18T16:12:30.428+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [4]
+2026-08-18T16:12:30.428+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:BIGINT) <- [5]
+2026-08-18T16:12:30.435+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [UPDATE_PROPERTY]
+2026-08-18T16:12:30.435+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:30.434339800]
+2026-08-18T16:12:30.435+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [Updated property "Legitimate Update".]
+2026-08-18T16:12:30.435+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [4]
+2026-08-18T16:12:30.435+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [PROPERTY]
+2026-08-18T16:12:30.435+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:30.435+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Property]
+2026-08-18T16:12:30.435+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [4]
+2026-08-18T16:12:30.435+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:30.435+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:30.435+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [5]
+2026-08-18T16:12:30.435+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+]]></system-out>
+  </testcase>
+  <testcase name="updateProperty_persistsChanges" classname="com.realestate.due_diligence_agent.controller.PropertyControllerIntegrationTest" time="0.4">
+    <system-out><![CDATA[2026-08-18T16:12:30.478+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#registerUser(RegisterRequest)
+2026-08-18T16:12:30.484+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34143449547900.6@example.com]
+2026-08-18T16:12:30.618+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34143449547900.6@example.com]
+2026-08-18T16:12:30.618+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:30.618+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [$2a$10$yGi.MX.dmn.ilIvCURROdOdPQHjaaOkD8zBAngxzFTBopS.7zMj/a]
+2026-08-18T16:12:30.618+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [null]
+2026-08-18T16:12:30.618+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:ENUM) <- [BUYER]
+2026-08-18T16:12:30.622+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#login(LoginRequest)
+2026-08-18T16:12:30.624+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34143449547900.6@example.com]
+2026-08-18T16:12:30.785+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [LOGIN]
+2026-08-18T16:12:30.786+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:30.783400900]
+2026-08-18T16:12:30.787+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [User logged in.]
+2026-08-18T16:12:30.787+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [7]
+2026-08-18T16:12:30.787+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [USER]
+2026-08-18T16:12:30.787+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:30.787+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Auth]
+2026-08-18T16:12:30.787+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [null]
+2026-08-18T16:12:30.787+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:30.787+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:30.787+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [7]
+2026-08-18T16:12:30.787+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:30.798+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34143449547900.6@example.com]
+2026-08-18T16:12:30.801+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#addProperty(PropertyRequest)
+2026-08-18T16:12:30.819+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [221B Baker Street]
+2026-08-18T16:12:30.820+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:DOUBLE) <- [1200.0]
+2026-08-18T16:12:30.820+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [London]
+2026-08-18T16:12:30.820+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [John Doe]
+2026-08-18T16:12:30.820+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:DOUBLE) <- [500000.0]
+2026-08-18T16:12:30.820+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [Residential]
+2026-08-18T16:12:30.820+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:DATE) <- [2026-08-18]
+2026-08-18T16:12:30.820+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:VARCHAR) <- [Greater London]
+2026-08-18T16:12:30.820+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [Original Title]
+2026-08-18T16:12:30.820+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:BIGINT) <- [7]
+2026-08-18T16:12:30.820+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:DATE) <- [null]
+2026-08-18T16:12:30.820+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:DOUBLE) <- [0.0]
+2026-08-18T16:12:30.820+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (13:VARCHAR) <- [Pending]
+2026-08-18T16:12:30.824+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [CREATE_PROPERTY]
+2026-08-18T16:12:30.824+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:30.821406]
+2026-08-18T16:12:30.825+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [Created property "Original Title".]
+2026-08-18T16:12:30.825+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [5]
+2026-08-18T16:12:30.825+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [PROPERTY]
+2026-08-18T16:12:30.825+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:30.825+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Property]
+2026-08-18T16:12:30.825+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [5]
+2026-08-18T16:12:30.825+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:30.825+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:30.825+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [7]
+2026-08-18T16:12:30.825+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:30.842+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34143449547900.6@example.com]
+2026-08-18T16:12:30.846+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#updateProperty(Long, PropertyRequest)
+2026-08-18T16:12:30.852+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [5]
+2026-08-18T16:12:30.852+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:BIGINT) <- [7]
+2026-08-18T16:12:30.857+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [UPDATE_PROPERTY]
+2026-08-18T16:12:30.857+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:30.856406600]
+2026-08-18T16:12:30.857+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [Updated property "Updated Title".]
+2026-08-18T16:12:30.857+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [5]
+2026-08-18T16:12:30.857+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [PROPERTY]
+2026-08-18T16:12:30.858+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:30.858+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Property]
+2026-08-18T16:12:30.858+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [5]
+2026-08-18T16:12:30.858+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:30.858+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:30.858+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [7]
+2026-08-18T16:12:30.858+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+]]></system-out>
+  </testcase>
+  <testcase name="request_withoutAuthentication_isRejectedWith401" classname="com.realestate.due_diligence_agent.controller.PropertyControllerIntegrationTest" time="0.027"/>
+  <testcase name="anyAuthenticatedUser_canViewAnotherUsersProperty" classname="com.realestate.due_diligence_agent.controller.PropertyControllerIntegrationTest" time="0.644">
+    <system-out><![CDATA[2026-08-18T16:12:30.913+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#registerUser(RegisterRequest)
+2026-08-18T16:12:30.917+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34143885502300.7@example.com]
+2026-08-18T16:12:31.056+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34143885502300.7@example.com]
+2026-08-18T16:12:31.056+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:31.056+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [$2a$10$rLaXI1Ig3WsbTvMxOhVwZuKxYJMxCEywHjL7k.kBCndsPwok05NY6]
+2026-08-18T16:12:31.056+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [null]
+2026-08-18T16:12:31.056+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:ENUM) <- [BUYER]
+2026-08-18T16:12:31.116+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#login(LoginRequest)
+2026-08-18T16:12:31.124+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34143885502300.7@example.com]
+2026-08-18T16:12:31.299+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [LOGIN]
+2026-08-18T16:12:31.300+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:31.298449200]
+2026-08-18T16:12:31.300+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [User logged in.]
+2026-08-18T16:12:31.302+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [8]
+2026-08-18T16:12:31.302+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [USER]
+2026-08-18T16:12:31.302+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:31.302+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Auth]
+2026-08-18T16:12:31.302+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [null]
+2026-08-18T16:12:31.302+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:31.302+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:31.302+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [8]
+2026-08-18T16:12:31.302+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:31.310+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#registerUser(RegisterRequest)
+2026-08-18T16:12:31.314+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34144279748600.8@example.com]
+2026-08-18T16:12:31.410+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34144279748600.8@example.com]
+2026-08-18T16:12:31.410+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:31.411+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [$2a$10$7gEv1kBZ/NBS6YhKgJk1oubtY1VAkqnjeM6A.v273sj6q.u9oiIMy]
+2026-08-18T16:12:31.411+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [null]
+2026-08-18T16:12:31.411+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:ENUM) <- [BUYER]
+2026-08-18T16:12:31.414+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#login(LoginRequest)
+2026-08-18T16:12:31.417+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34144279748600.8@example.com]
+2026-08-18T16:12:31.509+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [LOGIN]
+2026-08-18T16:12:31.510+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:31.509465300]
+2026-08-18T16:12:31.510+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [User logged in.]
+2026-08-18T16:12:31.510+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [9]
+2026-08-18T16:12:31.510+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [USER]
+2026-08-18T16:12:31.510+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:31.510+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Auth]
+2026-08-18T16:12:31.510+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [null]
+2026-08-18T16:12:31.510+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:31.510+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:31.510+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [9]
+2026-08-18T16:12:31.510+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:31.516+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34143885502300.7@example.com]
+2026-08-18T16:12:31.518+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#addProperty(PropertyRequest)
+2026-08-18T16:12:31.526+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [221B Baker Street]
+2026-08-18T16:12:31.526+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:DOUBLE) <- [1200.0]
+2026-08-18T16:12:31.526+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [London]
+2026-08-18T16:12:31.526+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [John Doe]
+2026-08-18T16:12:31.526+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:DOUBLE) <- [500000.0]
+2026-08-18T16:12:31.526+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [Residential]
+2026-08-18T16:12:31.526+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:DATE) <- [2026-08-18]
+2026-08-18T16:12:31.526+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:VARCHAR) <- [Greater London]
+2026-08-18T16:12:31.526+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [Marketplace Listing]
+2026-08-18T16:12:31.526+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:BIGINT) <- [8]
+2026-08-18T16:12:31.527+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:DATE) <- [null]
+2026-08-18T16:12:31.527+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:DOUBLE) <- [0.0]
+2026-08-18T16:12:31.527+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (13:VARCHAR) <- [Pending]
+2026-08-18T16:12:31.529+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [CREATE_PROPERTY]
+2026-08-18T16:12:31.529+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:31.528466400]
+2026-08-18T16:12:31.529+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [Created property "Marketplace Listing".]
+2026-08-18T16:12:31.529+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [6]
+2026-08-18T16:12:31.529+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [PROPERTY]
+2026-08-18T16:12:31.529+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:31.529+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Property]
+2026-08-18T16:12:31.529+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [6]
+2026-08-18T16:12:31.529+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:31.529+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:31.529+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [8]
+2026-08-18T16:12:31.529+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:31.536+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34144279748600.8@example.com]
+2026-08-18T16:12:31.541+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#getPropertyById(Long)
+2026-08-18T16:12:31.542+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [VIEW_PROPERTY]
+2026-08-18T16:12:31.543+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:31.542468600]
+2026-08-18T16:12:31.543+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [Viewed property ID 6.]
+2026-08-18T16:12:31.543+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [6]
+2026-08-18T16:12:31.543+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [PROPERTY]
+2026-08-18T16:12:31.543+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:31.543+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Property]
+2026-08-18T16:12:31.543+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [6]
+2026-08-18T16:12:31.543+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:31.543+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:31.543+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [9]
+2026-08-18T16:12:31.543+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+]]></system-out>
+  </testcase>
+  <testcase name="deleteProperty_removesIt_subsequentGetReturns404" classname="com.realestate.due_diligence_agent.controller.PropertyControllerIntegrationTest" time="0.608">
+    <system-out><![CDATA[2026-08-18T16:12:31.661+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#registerUser(RegisterRequest)
+2026-08-18T16:12:31.673+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34144632900900.9@example.com]
+2026-08-18T16:12:31.977+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34144632900900.9@example.com]
+2026-08-18T16:12:31.977+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:31.977+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [$2a$10$aSQMKFGySWHa.NVWP00JcebERswZDDOx8pSYPf49o06IRhPNdLlhy]
+2026-08-18T16:12:31.977+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [null]
+2026-08-18T16:12:31.977+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:ENUM) <- [BUYER]
+2026-08-18T16:12:31.981+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.AuthController#login(LoginRequest)
+2026-08-18T16:12:31.985+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34144632900900.9@example.com]
+2026-08-18T16:12:32.082+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [LOGIN]
+2026-08-18T16:12:32.083+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:32.080553800]
+2026-08-18T16:12:32.083+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [User logged in.]
+2026-08-18T16:12:32.083+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [10]
+2026-08-18T16:12:32.083+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [USER]
+2026-08-18T16:12:32.083+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:32.083+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Auth]
+2026-08-18T16:12:32.083+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [null]
+2026-08-18T16:12:32.083+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:32.083+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:32.083+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [10]
+2026-08-18T16:12:32.083+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:32.092+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34144632900900.9@example.com]
+2026-08-18T16:12:32.094+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#addProperty(PropertyRequest)
+2026-08-18T16:12:32.102+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [221B Baker Street]
+2026-08-18T16:12:32.103+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:DOUBLE) <- [1200.0]
+2026-08-18T16:12:32.103+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [London]
+2026-08-18T16:12:32.103+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [John Doe]
+2026-08-18T16:12:32.103+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:DOUBLE) <- [500000.0]
+2026-08-18T16:12:32.103+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [Residential]
+2026-08-18T16:12:32.103+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:DATE) <- [2026-08-18]
+2026-08-18T16:12:32.103+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:VARCHAR) <- [Greater London]
+2026-08-18T16:12:32.103+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [To Be Deleted]
+2026-08-18T16:12:32.103+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:BIGINT) <- [10]
+2026-08-18T16:12:32.103+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:DATE) <- [null]
+2026-08-18T16:12:32.103+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:DOUBLE) <- [0.0]
+2026-08-18T16:12:32.104+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (13:VARCHAR) <- [Pending]
+2026-08-18T16:12:32.108+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [CREATE_PROPERTY]
+2026-08-18T16:12:32.109+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:32.107554500]
+2026-08-18T16:12:32.109+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [Created property "To Be Deleted".]
+2026-08-18T16:12:32.109+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [7]
+2026-08-18T16:12:32.109+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [PROPERTY]
+2026-08-18T16:12:32.109+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:32.109+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Property]
+2026-08-18T16:12:32.109+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [7]
+2026-08-18T16:12:32.109+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:32.109+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:32.109+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [10]
+2026-08-18T16:12:32.109+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:32.125+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34144632900900.9@example.com]
+2026-08-18T16:12:32.127+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#deleteProperty(Long)
+2026-08-18T16:12:32.141+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [DELETE_PROPERTY]
+2026-08-18T16:12:32.141+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-08-18T16:12:32.141556900]
+2026-08-18T16:12:32.142+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [Deleted property ID 7.]
+2026-08-18T16:12:32.142+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [7]
+2026-08-18T16:12:32.142+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [PROPERTY]
+2026-08-18T16:12:32.142+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [127.0.0.1]
+2026-08-18T16:12:32.142+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (7:VARCHAR) <- [Property]
+2026-08-18T16:12:32.142+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (8:BIGINT) <- [7]
+2026-08-18T16:12:32.142+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [BUYER]
+2026-08-18T16:12:32.142+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [SUCCESS]
+2026-08-18T16:12:32.142+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (11:BIGINT) <- [10]
+2026-08-18T16:12:32.142+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (12:VARCHAR) <- [Property Tester]
+2026-08-18T16:12:32.148+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [property.test.34144632900900.9@example.com]
+2026-08-18T16:12:32.150+05:30 TRACE 3824 --- [due-diligence-agent-test] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.realestate.due_diligence_agent.controller.PropertyController#getPropertyById(Long)
+]]></system-out>
+  </testcase>
+  <testcase name="request_withInvalidToken_isRejectedWith401" classname="com.realestate.due_diligence_agent.controller.PropertyControllerIntegrationTest" time="0.043"/>
+</testsuite>

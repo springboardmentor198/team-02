@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import TopHeader from "../components/TopHeader";
 import StatusBadge from "../components/StatusBadge";
-import api from "../services/api";
+import api, { getCurrentUserId } from "../services/api";
 import {
   MapPin,
   Building2,
@@ -39,6 +39,7 @@ function Dashboard() {
   const [stats, setStats] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [currentUserId, setCurrentUserId] = useState(null);
 
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [showDetails, setShowDetails] = useState(false);
@@ -52,12 +53,14 @@ function Dashboard() {
     setLoading(true);
     setError("");
     try {
-      const [propsRes, statsRes] = await Promise.all([
+      const [propsRes, statsRes, userId] = await Promise.all([
         api.get("/properties"),
         api.get("/properties/stats"),
+        getCurrentUserId(),
       ]);
       setProperties(propsRes.data);
       setStats(statsRes.data);
+      setCurrentUserId(userId != null ? String(userId) : null);
     } catch (e) {
       console.log(e);
       setError("Couldn't load your dashboard. Is the backend running on port 8080?");
@@ -86,7 +89,7 @@ function Dashboard() {
   };
 
   const startEditProperty = () => {
-    if (!selectedProperty) return;
+    if (!selectedProperty || !isOwnProperty) return;
     setEditForm({
       title: selectedProperty.title || "",
       address: selectedProperty.address || "",
@@ -110,7 +113,7 @@ function Dashboard() {
 
   const saveEditProperty = async (e) => {
     e.preventDefault();
-    if (!selectedProperty || !editForm) return;
+    if (!selectedProperty || !editForm || !isOwnProperty) return;
     setSavingEdit(true);
     setEditError("");
     try {
@@ -141,7 +144,7 @@ function Dashboard() {
   };
 
   const handleDeleteProperty = async () => {
-    if (!selectedProperty) return;
+    if (!selectedProperty || !isOwnProperty) return;
     if (!window.confirm(`Delete "${selectedProperty.title}"? This cannot be undone.`)) return;
     try {
       // Backend: PropertyController.deleteProperty → DELETE /api/properties/{id}
@@ -179,6 +182,21 @@ function Dashboard() {
   const typeEntries = Object.entries(stats);
   const typeTotal = typeEntries.reduce((s,[,c])=>s+c,0)||1;
   const typeColors=["#4D7B73","#C89546","#B45B46","#3E63C2","#8E6C9C"];
+
+  // ---------------------------------------------------------------
+  // Property visibility is now marketplace-wide (any authenticated user
+  // can view any listing), but editing/deleting/verifying is still
+  // owner-only on the backend. PropertyDetailsResponse (the /properties/{id}
+  // detail DTO) doesn't include the owning user's id, so we look it up from
+  // the /properties list response instead, which does.
+  // ---------------------------------------------------------------
+  const selectedPropertyOwnerId = selectedProperty
+    ? properties.find((p) => p.id === selectedProperty.id)?.user?.id
+    : null;
+  const isOwnProperty =
+    currentUserId != null &&
+    selectedPropertyOwnerId != null &&
+    String(selectedPropertyOwnerId) === currentUserId;
 
   // --- Detail view presentation helpers ---
   const scoreValue = Number(selectedProperty?.verificationScore) || 0;
@@ -355,7 +373,7 @@ function Dashboard() {
           <div className="px-10 py-8">
             <h1 className="font-serif text-[44px] text-[#1B2338]">Good morning, {username}</h1>
             <p className="text-sm text-gray-500 mt-2">
-              {loading ? "Loading your properties…" : `${properties.length} properties tracked`}
+              {loading ? "Loading properties…" : `${properties.length} properties tracked`}
             </p>
 
             {error && (
@@ -464,29 +482,37 @@ function Dashboard() {
                 </div>
 
                 <div className="flex items-center gap-3 shrink-0">
-                  {isEditingProperty ? (
-                    <button
-                      onClick={cancelEditProperty}
-                      disabled={savingEdit}
-                      className="px-4 py-2.5 rounded-md border border-[#E3DDCE] text-[#1B2338] text-sm font-medium bg-white hover:bg-[#EFEAE0] transition disabled:opacity-50"
-                    >
-                      Cancel
-                    </button>
+                  {isOwnProperty ? (
+                    <>
+                      {isEditingProperty ? (
+                        <button
+                          onClick={cancelEditProperty}
+                          disabled={savingEdit}
+                          className="px-4 py-2.5 rounded-md border border-[#E3DDCE] text-[#1B2338] text-sm font-medium bg-white hover:bg-[#EFEAE0] transition disabled:opacity-50"
+                        >
+                          Cancel
+                        </button>
+                      ) : (
+                        <button
+                          onClick={startEditProperty}
+                          className="flex items-center gap-2 px-4 py-2.5 rounded-md border border-[#1B2338] text-[#1B2338] text-sm font-medium hover:bg-[#1B2338] hover:text-white transition"
+                        >
+                          <Pencil size={14} /> Edit
+                        </button>
+                      )}
+                      <button
+                        onClick={handleDeleteProperty}
+                        disabled={isEditingProperty}
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-md bg-[#B45B46] text-white text-sm font-medium hover:bg-[#9c4c3a] transition disabled:opacity-50"
+                      >
+                        <Trash2 size={14} /> Delete
+                      </button>
+                    </>
                   ) : (
-                    <button
-                      onClick={startEditProperty}
-                      className="flex items-center gap-2 px-4 py-2.5 rounded-md border border-[#1B2338] text-[#1B2338] text-sm font-medium hover:bg-[#1B2338] hover:text-white transition"
-                    >
-                      <Pencil size={14} /> Edit
-                    </button>
+                    <span className="text-xs text-gray-400 italic px-1">
+                      Listed by another user — view only
+                    </span>
                   )}
-                  <button
-                    onClick={handleDeleteProperty}
-                    disabled={isEditingProperty}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-md bg-[#B45B46] text-white text-sm font-medium hover:bg-[#9c4c3a] transition disabled:opacity-50"
-                  >
-                    <Trash2 size={14} /> Delete
-                  </button>
                 </div>
               </div>
 

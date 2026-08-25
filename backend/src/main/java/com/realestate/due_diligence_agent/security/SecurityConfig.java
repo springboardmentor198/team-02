@@ -16,9 +16,15 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
-    public SecurityConfig(JwtFilter jwtFilter) {
+    public SecurityConfig(JwtFilter jwtFilter,
+            JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+            JwtAccessDeniedHandler jwtAccessDeniedHandler) {
         this.jwtFilter = jwtFilter;
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
     }
 
     @Bean
@@ -33,9 +39,18 @@ public class SecurityConfig {
 
                         // Public APIs
                         .requestMatchers("/api/auth/**").permitAll()
+                        // Uploaded profile photos are served as plain static files so
+                        // <img src="..."> can load them directly (no way to attach the
+                        // JWT Authorization header to an <img> request). Filenames are
+                        // randomised (UUID) so this isn't meaningfully enumerable.
+                        .requestMatchers("/uploads/**").permitAll()
 
                         // Role Based APIs
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        // System-wide audit log is administrator-only. Enforced here (not
+                        // just hidden in the sidebar) so a BUYER hitting the endpoint
+                        // directly still gets a 403, same convention as /api/admin/**.
+                        .requestMatchers("/api/audit-logs/**").hasRole("ADMIN")
                         .requestMatchers("/api/buyer/**").hasRole("BUYER")
                         .requestMatchers("/api/agent/**").hasRole("AGENT")
                         .requestMatchers("/api/legal/**").hasRole("LEGAL_REVIEWER")
@@ -45,6 +60,10 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
 
                         .httpBasic(httpBasic -> httpBasic.disable())
+
+                        .exceptionHandling(exceptions -> exceptions
+                                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                                .accessDeniedHandler(jwtAccessDeniedHandler))
 
                 .addFilterBefore(jwtFilter,
                         UsernamePasswordAuthenticationFilter.class);

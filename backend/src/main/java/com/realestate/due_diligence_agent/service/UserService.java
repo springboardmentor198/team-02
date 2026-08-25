@@ -1,12 +1,21 @@
 package com.realestate.due_diligence_agent.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.realestate.due_diligence_agent.dto.AuthResponse;
 import com.realestate.due_diligence_agent.dto.ChangePasswordRequest;
@@ -35,6 +44,13 @@ public class UserService {
     private final OtpRepository otpRepository;
     private final EmailService emailService;
     private final AuditLogService auditLogService;
+
+    @Value("${app.upload.profile-images-dir}")
+    private String profileImagesDir;
+
+    private static final Set<String> ALLOWED_IMAGE_TYPES =
+            Set.of("image/jpeg", "image/png", "image/webp");
+    private static final long MAX_IMAGE_BYTES = 5L * 1024 * 1024; // 5MB
 
     public UserService(UserRepository userRepository,
             PasswordEncoder passwordEncoder,
@@ -199,5 +215,77 @@ public class UserService {
         userRepository.save(user);
 
         otpRepository.deleteByEmail(request.getEmail());
+    }
+
+    // ==========================
+    // Profile Photo (Requested Change 4)
+    // ==========================
+    // Stored on local disk under app.upload.profile-images-dir, matching the
+    // rest of this project's footprint -- no external storage service. See
+    // WebConfig for how the directory is exposed back out over HTTP.
+    public User uploadProfilePhoto(MultipartFile file) {
+
+        if (file == null || file.isEmpty()) {
+            throw new BadRequestException("No file was uploaded.");
+        }
+        if (!ALLOWED_IMAGE_TYPES.contains(file.getContentType())) {
+            throw new BadRequestException("Only JPEG, PNG, or WEBP images are allowed.");
+        }
+        if (file.getSize() > MAX_IMAGE_BYTES) {
+            throw new BadRequestException("Image must be smaller than 5MB.");
+        }
+
+        User user = getLoggedInUser();
+
+        try {
+            Path dir = Paths.get(profileImagesDir);
+            Files.createDirectories(dir);
+
+            String extension = switch (file.getContentType()) {
+                case "image/png" -> ".png";
+                case "image/webp" -> ".webp";
+                default -> ".jpg";
+            };
+            String filename = user.getId() + "-" + UUID.randomUUID() + extension;
+            Path target = dir.resolve(filename);
+
+            Files.copy(file.getInputStream(), target, StandardCopyOption.REPLACE_EXISTING);
+
+            // Clean up the previous file so uploads don't accumulate.
+            deleteExistingPhotoFile(user);
+
+            user.setProfileImagePath(filename);
+            return userRepository.save(user);
+
+        } catch (IOException ex) {
+            throw new BadRequestException("Couldn't save the uploaded image. Please try again.");
+        }
+    }
+
+    public User removeProfilePhoto() {
+        User user = getLoggedInUser();
+        deleteExistingPhotoFile(user);
+        user.setProfileImagePath(null);
+        return userRepository.save(user);
+    }
+
+    private void deleteExistingPhotoFile(User user) {
+        if (user.getProfileImagePath() == null) {
+            return;
+        }
+        try {
+            Files.deleteIfExists(Paths.get(profileImagesDir).resolve(user.getProfileImagePath()));
+        } catch (IOException ignored) {
+            // Non-fatal -- an orphaned file on disk isn't worth failing the request over.
+        }
+    }
+
+    // Public URL the frontend can drop straight into <img src>. WebConfig
+    // maps /uploads/profile-images/** back to profileImagesDir on disk.
+    public String getProfileImageUrl(User user) {
+        if (user.getProfileImagePath() == null) {
+            return null;
+        }
+        return "/uploads/profile-images/" + user.getProfileImagePath();
     }
 }
